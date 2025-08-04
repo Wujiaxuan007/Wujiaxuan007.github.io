@@ -1,0 +1,2205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企业智能问询中心</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .chat-container {
+            width: 100%;
+            max-width: 1000px;
+            height: 90vh;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header {
+            background: white;
+            color: #333;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e9ecef;
+            position: relative;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-icon {
+            width: 32px;
+            height: 32px;
+            background: #f8f9fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: #666;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            position: relative;
+        }
+
+        .header-title::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #007bff;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #666;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: background 0.3s;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-btn:hover {
+            background: #f8f9fa;
+        }
+
+        .chat-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px 24px;
+            overflow-y: auto;
+            background: white;
+        }
+
+        .message {
+            margin-bottom: 16px;
+            display: flex;
+            gap: 12px;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .message-avatar.ai {
+            background: #f8f9fa;
+            color: #666;
+            border: 1px solid #e9ecef;
+            font-size: 16px;
+        }
+
+        .message-avatar.user {
+            background: #007bff;
+            color: white;
+        }
+
+        .message-content {
+            flex: 1;
+            max-width: 75%;
+        }
+
+        .message-bubble {
+            background: #f8f9fa;
+            padding: 12px 16px;
+            border-radius: 12px;
+            box-shadow: none;
+            border: 1px solid #e9ecef;
+            position: relative;
+        }
+
+        .message-bubble.ai {
+            background: #f8f9fa;
+            color: #333;
+            border: 1px solid #e9ecef;
+        }
+
+        .message-bubble.user {
+            background: #007bff;
+            color: white;
+            margin-left: auto;
+            border: 1px solid #007bff;
+        }
+
+        .message-text {
+            line-height: 1.5;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .message-time {
+            font-size: 11px;
+            color: #999;
+            margin-top: 6px;
+            text-align: right;
+        }
+
+        .message-time.ai {
+            color: #999;
+        }
+
+        /* 深度研究相关样式 */
+        .deep-research-section {
+            margin-top: 12px;
+            border-top: 1px solid #e9ecef;
+            padding-top: 12px;
+        }
+
+        .research-plan {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 1px solid #e9ecef;
+        }
+
+        .research-plan h4 {
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .research-plan ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .research-plan li {
+            padding: 4px 0;
+            position: relative;
+            padding-left: 16px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .research-plan li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #007bff;
+        }
+
+        .research-progress {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 1px solid #e9ecef;
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            position: relative;
+        }
+
+        .progress-step:not(:last-child):after {
+            content: "";
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            width: 100%;
+            height: 2px;
+            background: #e9ecef;
+            z-index: 1;
+        }
+
+        .step-circle {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: #666;
+            position: relative;
+            z-index: 2;
+            transition: all 0.2s;
+        }
+
+        .step-circle.active {
+            background: #007bff;
+            color: white;
+        }
+
+        .step-circle.completed {
+            background: #28a745;
+            color: white;
+        }
+
+        .step-label {
+            font-size: 11px;
+            margin-top: 4px;
+            text-align: center;
+            color: #666;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #e9ecef;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #007bff;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .research-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .action-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 16px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #333;
+            border: 1px solid #e9ecef;
+        }
+
+        .btn-secondary:hover {
+            background: #e9ecef;
+        }
+
+        .research-results {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 12px;
+            max-height: 250px;
+            overflow-y: auto;
+            border: 1px solid #e9ecef;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .results-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .toggle-btn {
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 4px;
+        }
+
+        .results-content {
+            display: none;
+        }
+
+        .results-content.show {
+            display: block;
+        }
+
+        .result-item {
+            background: white;
+            border-radius: 6px;
+            padding: 10px;
+            margin-bottom: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .result-title {
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #007bff;
+            font-size: 13px;
+        }
+
+        .result-summary {
+            font-size: 12px;
+            line-height: 1.4;
+            margin-bottom: 6px;
+            color: #666;
+        }
+
+        .result-meta {
+            font-size: 11px;
+            color: #999;
+        }
+
+
+
+        /* 输入区域 */
+        .input-section {
+            padding: 16px 24px;
+            background: white;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .input-row-1 {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 20px;
+            margin-bottom: 12px;
+        }
+
+        .input-row-2 {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .input-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: white;
+            border-radius: 8px;
+            padding: 8px 16px;
+            border: 1px solid #e9ecef;
+            position: relative;
+        }
+
+        .avatar-selector {
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .current-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 14px;
+            border: 1px solid #e9ecef;
+        }
+
+        .input-tools {
+            display: flex;
+            gap: 0;
+            align-items: center;
+        }
+
+        .tool-btn {
+            background: none;
+            border: none;
+            color: #999;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 8px 4px;
+            transition: all 0.2s;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .tool-btn:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: -1px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 16px;
+            background: #e9ecef;
+        }
+
+        .tool-btn:hover {
+            background: #f8f9fa;
+            color: #007bff;
+        }
+
+        .input-field {
+            flex: 1;
+            border: none;
+            background: none;
+            outline: none;
+            font-size: 14px;
+            color: #333;
+            resize: none;
+            max-height: 80px;
+            min-height: 40px;
+            padding: 0;
+            line-height: 1.4;
+            transition: padding-left 0.3s ease;
+        }
+
+        .input-field.with-edit-plan {
+            padding-left: 80px;
+        }
+
+        .input-field::placeholder {
+            color: #999;
+        }
+
+        .send-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            width: 36px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 12px;
+        }
+
+        .send-btn:hover {
+            background: #0056b3;
+        }
+
+        /* 深度研究按钮 */
+        .deep-research-btn {
+            background: none;
+            border: none;
+            color: #666;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 8px 12px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            border-radius: 6px;
+            user-select: none;
+        }
+
+        .deep-research-btn:hover {
+            background: #f8f9fa;
+            color: #007bff;
+        }
+
+        .deep-research-btn:active {
+            background: #e9ecef;
+            color: #0056b3;
+            transform: translateY(1px);
+        }
+
+        .deep-research-btn.active {
+            background: #007bff;
+            color: white;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+
+
+        .search-icon {
+            font-size: 16px;
+        }
+
+        .search-text {
+            font-weight: 500;
+        }
+
+        /* 研究计划样式 */
+        .research-plan-container {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 12px 0;
+            border: 1px solid #e9ecef;
+        }
+
+        .plan-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .plan-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .plan-btn.primary {
+            background: #007bff;
+            color: white;
+        }
+
+        .plan-btn.primary:hover {
+            background: #0056b3;
+        }
+
+        .plan-btn.secondary {
+            background: #f8f9fa;
+            color: #666;
+            border: 1px solid #e9ecef;
+        }
+
+        .plan-btn.secondary:hover {
+            background: #e9ecef;
+        }
+
+        /* 研究进度Tabs */
+        .research-tabs {
+            display: flex;
+            border-bottom: 1px solid #e9ecef;
+            margin-bottom: 12px;
+        }
+
+        .tab-btn {
+            padding: 8px 16px;
+            background: none;
+            border: none;
+            color: #666;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            color: #007bff;
+            border-bottom-color: #007bff;
+        }
+
+        .tab-btn:hover {
+            color: #007bff;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* 活动列表 */
+        .activity-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .activity-item {
+            padding: 12px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .activity-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-size: 13px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .activity-desc {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .activity-time {
+            font-size: 11px;
+            color: #999;
+        }
+
+        /* 预制问题样式 */
+        .predefined-questions {
+            margin-top: 12px;
+        }
+
+        .question-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .question-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(4px);
+        }
+
+        .question-icon {
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .question-text {
+            font-size: 13px;
+            line-height: 1.4;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .chat-container {
+                width: 100%;
+                height: 95vh;
+            }
+
+            .header {
+                padding: 12px 16px;
+            }
+
+            .header-title {
+                font-size: 16px;
+            }
+
+            .chat-messages {
+                padding: 12px 16px;
+            }
+
+            .message-content {
+                max-width: 85%;
+            }
+
+            .actions-grid {
+                flex-direction: column;
+            }
+
+            .action-card {
+                min-width: auto;
+            }
+
+            .input-section {
+                padding: 12px 16px;
+            }
+        }
+
+        /* 加载动画 */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* 计划制定动效 */
+        .plan-loading {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plan-loading::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 123, 255, 0.1), transparent);
+            animation: planShimmer 2s infinite;
+        }
+
+        @keyframes planShimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .plan-item-loading {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plan-item-loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            animation: itemShimmer 1.5s infinite;
+        }
+
+        @keyframes itemShimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* 活动加载动效 */
+        .activity-loading {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-bottom: 1px solid #f0f0f0;
+            animation: activityFadeIn 0.5s ease-out;
+        }
+
+        @keyframes activityFadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .activity-icon-loading {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #e9ecef;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .activity-icon-loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+            animation: iconShimmer 1.2s infinite;
+        }
+
+        @keyframes iconShimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .activity-content-loading {
+            flex: 1;
+        }
+
+        .activity-title-loading {
+            height: 16px;
+            background: #e9ecef;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            width: 60%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .activity-title-loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            animation: titleShimmer 1.8s infinite;
+        }
+
+        @keyframes titleShimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .activity-desc-loading {
+            height: 12px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            margin-bottom: 6px;
+            width: 80%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .activity-desc-loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            animation: descShimmer 2.1s infinite;
+        }
+
+        @keyframes descShimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .activity-time-loading {
+            height: 10px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            width: 40%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .activity-time-loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            animation: timeShimmer 2.4s infinite;
+        }
+
+        @keyframes timeShimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* 进度条动效 */
+        .progress-loading {
+            width: 100%;
+            height: 4px;
+            background: #e9ecef;
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, #007bff, transparent);
+            animation: progressShimmer 2s infinite;
+        }
+
+        @keyframes progressShimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* 步骤圆圈动效 */
+        .step-circle-loading {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #e9ecef;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step-circle-loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+            animation: circleShimmer 1.5s infinite;
+        }
+
+        @keyframes circleShimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* 脉冲动效 */
+        .pulse-loading {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.7;
+                transform: scale(1.05);
+            }
+        }
+
+        /* 呼吸动效 */
+        .breathing-loading {
+            animation: breathing 2s ease-in-out infinite;
+        }
+
+        @keyframes breathing {
+            0%, 100% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* 波浪动效 */
+        .wave-loading {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wave-loading::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 123, 255, 0.1), transparent);
+            animation: wave 2s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* 旋转加载器 */
+        .spinner-loading {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #e9ecef;
+            border-top: 2px solid #007bff;
+            border-radius: 50%;
+            animation: spinner 1s linear infinite;
+        }
+
+        @keyframes spinner {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* 点状加载器 */
+        .dots-loading {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #007bff;
+            animation: dotBounce 1.4s ease-in-out infinite both;
+        }
+
+        .dot:nth-child(1) { animation-delay: -0.32s; }
+        .dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes dotBounce {
+            0%, 80%, 100% {
+                transform: scale(0);
+            }
+            40% {
+                transform: scale(1);
+            }
+        }
+
+        /* 骨架屏动效 */
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: skeleton 1.5s infinite;
+        }
+
+        @keyframes skeleton {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* 渐变加载动效 */
+        .gradient-loading {
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0, #f0f0f0);
+            background-size: 200% 200%;
+            animation: gradientMove 2s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* AI打字机效果 */
+        .typing-animation {
+            overflow: hidden;
+            border-right: 2px solid #007bff;
+            white-space: nowrap;
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #007bff; }
+        }
+
+        /* 逐字显示效果 */
+        .char-by-char {
+            opacity: 0;
+            animation: charAppear 0.1s ease-in forwards;
+        }
+
+        @keyframes charAppear {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* 段落逐行显示 */
+        .paragraph-typing {
+            opacity: 0;
+            transform: translateY(10px);
+            animation: paragraphSlideIn 0.5s ease-out forwards;
+        }
+
+        @keyframes paragraphSlideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 光标闪烁效果 */
+        .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            background: #007bff;
+            animation: cursorBlink 1s infinite;
+            margin-left: 2px;
+        }
+
+        @keyframes cursorBlink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* 深度研究标题动效 */
+        .research-title-animation {
+            animation: researchTitleColor 4s ease-in-out infinite;
+            background: linear-gradient(45deg, #333, #666, #999, #666, #333);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        @keyframes researchTitleColor {
+            0% {
+                background-position: 0% 50%;
+                filter: brightness(1);
+            }
+            25% {
+                background-position: 50% 50%;
+                filter: brightness(1.1);
+            }
+            50% {
+                background-position: 100% 50%;
+                filter: brightness(0.9);
+            }
+            75% {
+                background-position: 50% 50%;
+                filter: brightness(1.05);
+            }
+            100% {
+                background-position: 0% 50%;
+                filter: brightness(1);
+            }
+        }
+
+        /* 深度研究图标动效 */
+        .research-icon-animation {
+            animation: researchIconPulse 3s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes researchIconPulse {
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+                filter: hue-rotate(0deg) brightness(1);
+            }
+            25% {
+                transform: scale(1.1) rotate(5deg);
+                filter: hue-rotate(90deg) brightness(1.2);
+            }
+            50% {
+                transform: scale(1.05) rotate(-3deg);
+                filter: hue-rotate(180deg) brightness(0.8);
+            }
+            75% {
+                transform: scale(1.15) rotate(2deg);
+                filter: hue-rotate(270deg) brightness(1.1);
+            }
+        }
+
+        /* 深度研究整体动效 */
+        .research-header-animation {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            animation: researchHeaderGlow 5s ease-in-out infinite;
+            padding: 4px 8px;
+            border-radius: 6px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .research-header-animation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 123, 255, 0.1), transparent);
+            animation: headerShimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes researchHeaderGlow {
+            0%, 100% {
+                filter: brightness(1);
+                transform: translateY(0);
+                box-shadow: 0 0 0 rgba(0, 123, 255, 0);
+            }
+            25% {
+                filter: brightness(1.05);
+                transform: translateY(-1px);
+                box-shadow: 0 2px 8px rgba(0, 123, 255, 0.1);
+            }
+            50% {
+                filter: brightness(0.95);
+                transform: translateY(0);
+                box-shadow: 0 0 0 rgba(0, 123, 255, 0);
+            }
+            75% {
+                filter: brightness(1.02);
+                transform: translateY(-0.5px);
+                box-shadow: 0 1px 4px rgba(0, 123, 255, 0.05);
+            }
+        }
+
+        @keyframes headerShimmer {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
+        }
+
+        /* 通知样式 */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 10px;
+            padding: 15px 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            border-left: 4px solid #28a745;
+        }
+
+        .notification.info {
+            border-left: 4px solid #17a2b8;
+        }
+
+        .notification.warning {
+            border-left: 4px solid #ffc107;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <!-- 头部 -->
+        <div class="header">
+                            <div class="header-left">
+                    <div class="header-icon">$</div>
+                    <div class="header-title">企业智能问询中心</div>
+                </div>
+            <button class="close-btn" onclick="closeChat()">×</button>
+        </div>
+
+        <!-- 聊天主体 -->
+        <div class="chat-body">
+            <div class="chat-messages" id="chatMessages">
+                <!-- AI欢迎消息 -->
+                <div class="message">
+                    <div class="message-avatar ai">👩‍💼</div>
+                    <div class="message-content">
+                        <div class="message-bubble ai">
+                            <div class="message-text">
+                                当前您有风险项目357条，请及时处理！
+                            </div>
+                            <div class="message-time ai">刚刚</div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+            <!-- 输入区域 -->
+            <div class="input-section">
+                <!-- 第一行：头像和工具 -->
+                <div class="input-row-1">
+                    <div class="avatar-selector">
+                        <div class="current-avatar">👩‍💼</div>
+                        <span style="font-size: 13px; color: #333; font-weight: 500;">企业AI顾问</span>
+                        <span style="font-size: 12px; color: #999;">▼</span>
+                    </div>
+                    <div class="input-tools">
+                        <!-- 深度研究按钮 -->
+                        <button class="deep-research-btn" id="deepResearchBtn" onclick="startDeepResearch()" title="深入研究">
+                            <span class="search-icon">🔍</span>
+                            <span class="search-text">深入研究</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 第二行：深入研究按钮和输入框 -->
+                <div class="input-row-2">
+                
+                    <div class="input-field-container" style="flex: 1; display: flex; align-items: center; gap: 12px; background: white; border-radius: 8px; padding: 8px 16px; border: 1px solid #e9ecef; position: relative;">
+                        <div id="editPlanTag" style="display: none; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); z-index: 10;">
+                            <div style="display: flex; align-items: center; gap: 6px; background: #007bff; color: white; padding: 4px 8px; border-radius: 12px; font-size: 12px; font-weight: 500;">
+                                <span>编辑计划</span>
+                                <button onclick="removeEditPlanTag()" style="background: none; border: none; color: white; cursor: pointer; font-size: 14px; padding: 0; margin: 0; line-height: 1;">×</button>
+                            </div>
+                        </div>
+                        <textarea 
+                            class="input-field" 
+                            placeholder="请输入" 
+                            id="messageInput"
+                            onkeydown="handleKeyDown(event)"
+                            oninput="autoResize(this)"
+                        ></textarea>
+
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <div style="font-size: 11px; color: #999;">
+                                发送 / Shift 换行
+                            </div>
+                            <button class="send-btn" onclick="sendMessage()">
+                                <span>➤</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 通知组件 -->
+    <div class="notification" id="notification"></div>
+
+    <script>
+        // 全局变量
+        let isResearchMode = false;
+        let researchProgress = 0;
+        let currentStep = 0;
+        const researchSteps = ['计划制定', '信息收集', '数据分析', '报告生成'];
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 自动聚焦到输入框
+            document.getElementById('messageInput').focus();
+        });
+
+        // 发送消息
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+
+            // 添加用户消息
+            addMessage(message, 'user');
+            input.value = '';
+            autoResize(input);
+
+            // 模拟AI响应
+            setTimeout(() => {
+                processUserMessage(message);
+            }, 1000);
+        }
+
+
+
+
+
+        // 开始深度研究
+        function startDeepResearch() {
+            const btn = document.getElementById('deepResearchBtn');
+            
+            // 检查当前状态
+            if (btn.classList.contains('active')) {
+                // 如果已经是激活状态，则取消激活
+                btn.classList.remove('active');
+                return;
+            }
+            
+            // 添加激活状态
+            btn.classList.add('active');
+            
+            // 自动填充预制问题
+            const predefinedQuestions = [
+                '分析人工智能在制造业的应用趋势',
+                '研究新能源汽车市场的发展前景',
+                '分析云计算技术在企业数字化转型中的作用',
+                '研究5G技术在工业互联网中的应用'
+            ];
+            
+            // 随机选择一个预制问题
+            const randomQuestion = predefinedQuestions[Math.floor(Math.random() * predefinedQuestions.length)];
+            
+            // 填充到输入框
+            const textarea = document.getElementById('messageInput');
+            textarea.value = randomQuestion;
+            textarea.focus();
+            autoResize(textarea);
+        }
+
+
+
+        // 处理用户消息
+        function processUserMessage(message) {
+            // 检查深入研究是否激活
+            const deepSearchBtn = document.getElementById('deepResearchBtn');
+            const isDeepSearchActive = deepSearchBtn.classList.contains('active');
+            
+            if (isDeepSearchActive) {
+                // 如果深入研究已激活，显示搜索话题
+                addSearchTopicMessage(message);
+            } else {
+                // 检测是否需要深度研究
+                const researchKeywords = ['分析', '研究', '调研', '深度', '详细', '全面', '市场', '竞品', '趋势'];
+                const needsResearch = researchKeywords.some(keyword => message.includes(keyword));
+
+                if (needsResearch) {
+                    // 添加研究计划消息
+                    addResearchPlanMessage(message);
+                } else {
+                    addSimpleResponse(message);
+                }
+            }
+        }
+
+        // 添加简单响应
+        function addSimpleResponse(userMessage) {
+            const responses = [
+                "我理解您的问题，让我为您提供相关信息...",
+                "根据您的问题，我建议您可以考虑以下几个方面...",
+                "这是一个很好的问题，让我为您详细解答...",
+                "我注意到您提到的这个方面，让我为您分析一下..."
+            ];
+            
+            const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+            addMessage(randomResponse, 'ai');
+        }
+
+        // 添加搜索话题消息
+        function addSearchTopicMessage(topic) {
+            const messageDiv = createMessageElement('ai');
+            const messageContent = messageDiv.querySelector('.message-content');
+            const messageBubble = messageContent.querySelector('.message-bubble');
+            
+            // 先显示标题
+            messageBubble.innerHTML = `
+                <div class="message-text">
+                    <strong class="research-header-animation">
+                        <span class="research-icon-animation">🔍</span>
+                        <span class="research-title-animation">深度研究计划</span>
+                    </strong><br>
+                    基于您的问题："<span style="color: #007bff; font-weight: 500;">${topic}</span>"，我将为您制定详细的研究计划：
+                </div>
+            `;
+            
+            // 添加消息到容器
+            const messagesContainer = document.getElementById('chatMessages');
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            
+            // 开始逐字输出研究计划
+            setTimeout(() => {
+                typeResearchPlan(messageBubble, topic);
+            }, 1000);
+        }
+
+        // 逐字输出研究计划
+        function typeResearchPlan(messageBubble, topic) {
+            const planText = `
+                <div class="research-plan-container">
+                    <h4>📋 研究计划</h4>
+                    <ul>
+                        <li>明确研究目标和范围</li>
+                        <li>收集相关市场数据和信息</li>
+                        <li>分析竞争对手和行业趋势</li>
+                        <li>生成专业研究报告</li>
+                    </ul>
+                    <div class="plan-actions">
+                        <button class="plan-btn primary" onclick="startResearchProcess()">开始研究</button>
+                        <button class="plan-btn secondary" onclick="modifyResearchPlan()">编辑计划</button>
+                    </div>
+                </div>
+            `;
+            
+            typeText(messageBubble, planText, () => {
+                // 输出完成后添加时间戳
+                const timeDiv = document.createElement('div');
+                timeDiv.className = 'message-time ai';
+                timeDiv.textContent = new Date().toLocaleTimeString();
+                messageBubble.appendChild(timeDiv);
+            });
+        }
+
+        // 添加研究计划消息
+        function addResearchPlanMessage(userQuestion = '') {
+            const messageDiv = createMessageElement('ai');
+            const messageContent = messageDiv.querySelector('.message-content');
+            const messageBubble = messageContent.querySelector('.message-bubble');
+            
+            // 先显示标题
+            messageBubble.innerHTML = `
+                <div class="message-text">
+                    <strong class="research-header-animation">
+                        <span class="research-icon-animation">🔍</span>
+                        <span class="research-title-animation">深度研究计划</span>
+                    </strong><br>
+                    ${userQuestion ? `基于您的问题："${userQuestion}"，我将为您制定详细的研究计划：` : '我将为您制定详细的研究计划：'}
+                </div>
+            `;
+            
+            // 添加消息到容器
+            const messagesContainer = document.getElementById('chatMessages');
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            
+            // 开始逐字输出研究计划
+            setTimeout(() => {
+                const planText = `
+                    <div class="research-plan-container">
+                        <h4>📋 研究计划</h4>
+                        <ul>
+                            <li>明确研究目标和范围</li>
+                            <li>收集相关市场数据和信息</li>
+                            <li>分析竞争对手和行业趋势</li>
+                            <li>生成专业研究报告</li>
+                        </ul>
+                        <div class="plan-actions">
+                            <button class="plan-btn primary" onclick="startResearchProcess()">开始研究</button>
+                            <button class="plan-btn secondary" onclick="modifyResearchPlan()">编辑计划</button>
+                        </div>
+                    </div>
+                `;
+                
+                typeText(messageBubble, planText, () => {
+                    // 输出完成后添加时间戳
+                    const timeDiv = document.createElement('div');
+                    timeDiv.className = 'message-time ai';
+                    timeDiv.textContent = new Date().toLocaleTimeString();
+                    messageBubble.appendChild(timeDiv);
+                });
+            }, 1000);
+        }
+
+        // 开始研究流程
+        function startResearchProcess() {
+            isResearchMode = true;
+            currentStep = 0;
+            researchProgress = 0;
+            
+            // 隐藏当前消息中的按钮
+            const currentMessage = document.querySelector('.message:last-child .plan-actions');
+            if (currentMessage) {
+                currentMessage.style.display = 'none';
+            }
+            
+            // 添加研究进度消息
+            addResearchProgressMessage();
+            
+            // 开始研究流程
+            startResearchSteps();
+        }
+
+        // 添加研究进度消息
+        function addResearchProgressMessage() {
+            const progressMessage = `
+                <div class="message-text">
+                    <strong class="research-header-animation">
+                        <span class="research-icon-animation">🔍</span>
+                        <span class="research-title-animation">深度研究进行中</span>
+                    </strong><br>
+                    正在为您进行全面的研究分析...
+                </div>
+                <div class="research-plan-container">
+                    <div class="research-tabs">
+                        <button class="tab-btn active" onclick="switchTab('activity')">活动</button>
+                        <button class="tab-btn" onclick="switchTab('report')">报告</button>
+                    </div>
+                    <div class="tab-content active" id="activityTab">
+                        <div class="activity-list" id="activityList">
+                            <div class="activity-item">
+                                <div class="activity-icon">📋</div>
+                                <div class="activity-content">
+                                    <div class="activity-title">制定研究计划</div>
+                                    <div class="activity-desc">正在确定研究目标和范围</div>
+                                    <div class="activity-time">刚刚</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content" id="reportTab">
+                        <div class="loading-container">
+                            <div class="loading-spinner"></div>
+                            <div class="loading-text">正在生成研究报告...</div>
+                            <div class="loading-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="reportProgress"></div>
+                                </div>
+                                <div class="progress-text">0%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            addMessage(progressMessage, 'ai');
+        }
+
+        // 开始研究步骤
+        function startResearchSteps() {
+            const activities = [
+                {
+                    icon: '🔍',
+                    title: '信息收集',
+                    desc: '正在从多个来源收集相关数据',
+                    time: '刚刚'
+                },
+                {
+                    icon: '📊',
+                    title: '数据分析',
+                    desc: '对收集到的数据进行深度分析',
+                    time: '1分钟前'
+                },
+                {
+                    icon: '📈',
+                    title: '趋势识别',
+                    desc: '识别关键市场趋势和机会',
+                    time: '2分钟前'
+                },
+                {
+                    icon: '📋',
+                    title: '报告撰写',
+                    desc: '生成专业研究报告',
+                    time: '3分钟前'
+                }
+            ];
+
+            let currentActivity = 0;
+            const activityList = document.getElementById('activityList');
+            
+            const activityInterval = setInterval(() => {
+                if (currentActivity < activities.length) {
+                    addActivityItem(activities[currentActivity]);
+                    currentActivity++;
+                } else {
+                    clearInterval(activityInterval);
+                    setTimeout(() => {
+                        completeResearch();
+                    }, 1000);
+                }
+            }, 1500); // 从3秒改为1.5秒
+        }
+
+        // 添加活动项
+        function addActivityItem(activity) {
+            const activityList = document.getElementById('activityList');
+            const activityItem = document.createElement('div');
+            activityItem.className = 'activity-item';
+            activityItem.innerHTML = `
+                <div class="activity-icon">${activity.icon}</div>
+                <div class="activity-content">
+                    <div class="activity-title">${activity.title}</div>
+                    <div class="activity-desc">${activity.desc}</div>
+                    <div class="activity-time">${activity.time}</div>
+                </div>
+            `;
+            activityList.appendChild(activityItem);
+            activityList.scrollTop = activityList.scrollHeight;
+        }
+
+        // 切换Tab
+        function switchTab(tabName) {
+            // 更新按钮状态
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // 更新内容显示
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(tabName + 'Tab').classList.add('active');
+        }
+
+        // 完成研究
+        function completeResearch() {
+            // 更新研究进度消息，默认显示报告Tab
+            const progressMessage = `
+                <div class="message-text">
+                    <strong class="research-header-animation">
+                        <span class="research-icon-animation">🔍</span>
+                        <span class="research-title-animation">深度研究已完成</span>
+                    </strong><br>
+                    研究报告已生成完成，以下是详细分析结果：
+                </div>
+                <div class="research-plan-container">
+                    <div class="research-tabs">
+                        <button class="tab-btn active" onclick="switchTab('report')">📊 研究报告</button>
+                        <button class="tab-btn" onclick="switchTab('activity')">📋 研究活动</button>
+                    </div>
+                    <div class="tab-content active" id="reportTab">
+                        <div style="padding: 16px;">
+                            <div style="background: white; border-radius: 8px; padding: 20px; border: 1px solid #e9ecef; margin-bottom: 16px;">
+                                <h5 style="margin-bottom: 16px; color: #007bff; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+                                    <span>📈</span>主要发现
+                                </h5>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+                                    <div style="background: #f8f9fa; padding: 12px; border-radius: 6px; border-left: 3px solid #28a745;">
+                                        <div style="font-weight: 600; color: #28a745; margin-bottom: 4px;">市场趋势</div>
+                                        <div style="font-size: 13px; color: #666;">识别了3个关键发展趋势</div>
+                                    </div>
+                                    <div style="background: #f8f9fa; padding: 12px; border-radius: 6px; border-left: 3px solid #007bff;">
+                                        <div style="font-weight: 600; color: #007bff; margin-bottom: 4px;">竞争分析</div>
+                                        <div style="font-size: 13px; color: #666;">分析了5家主要竞争对手</div>
+                                    </div>
+                                    <div style="background: #f8f9fa; padding: 12px; border-radius: 6px; border-left: 3px solid #ffc107;">
+                                        <div style="font-weight: 600; color: #ffc107; margin-bottom: 4px;">机会识别</div>
+                                        <div style="font-size: 13px; color: #666;">发现了2个潜在市场机会</div>
+                                    </div>
+                                    <div style="background: #f8f9fa; padding: 12px; border-radius: 6px; border-left: 3px solid #dc3545;">
+                                        <div style="font-weight: 600; color: #dc3545; margin-bottom: 4px;">风险评估</div>
+                                        <div style="font-size: 13px; color: #666;">识别了3个主要风险点</div>
+                                    </div>
+                                </div>
+                                <div style="background: #f8f9fa; padding: 16px; border-radius: 6px; margin-bottom: 16px;">
+                                    <h6 style="margin-bottom: 12px; color: #333; font-size: 14px;">📋 详细分析</h6>
+                                    <ul style="margin: 0; padding-left: 20px; color: #666; font-size: 13px; line-height: 1.6;">
+                                        <li>市场规模预计在2024年达到<span style="color: #007bff; font-weight: 600;">1.2万亿元</span></li>
+                                        <li>年增长率保持在<span style="color: #28a745; font-weight: 600;">15-20%</span>区间</li>
+                                        <li>主要竞争对手市场份额分布相对集中</li>
+                                        <li>技术创新是未来发展的关键驱动力</li>
+                                    </ul>
+                                </div>
+                                <div class="report-actions" style="display: flex; gap: 12px; flex-wrap: wrap;">
+                                    <button class="plan-btn primary" onclick="downloadReport()" style="display: flex; align-items: center; gap: 6px;">
+                                        <span>📥</span>下载报告
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content" id="activityTab">
+                        <div class="activity-list" id="activityList">
+                            <div class="activity-item">
+                                <div class="activity-icon">📋</div>
+                                <div class="activity-content">
+                                    <div class="activity-title">制定研究计划</div>
+                                    <div class="activity-desc">确定研究目标和范围</div>
+                                    <div class="activity-time">已完成</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">🔍</div>
+                                <div class="activity-content">
+                                    <div class="activity-title">信息收集</div>
+                                    <div class="activity-desc">从多个来源收集相关数据</div>
+                                    <div class="activity-time">已完成</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">📊</div>
+                                <div class="activity-content">
+                                    <div class="activity-title">数据分析</div>
+                                    <div class="activity-desc">对收集到的数据进行深度分析</div>
+                                    <div class="activity-time">已完成</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">📈</div>
+                                <div class="activity-content">
+                                    <div class="activity-title">趋势识别</div>
+                                    <div class="activity-desc">识别关键市场趋势和机会</div>
+                                    <div class="activity-time">已完成</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">📋</div>
+                                <div class="activity-content">
+                                    <div class="activity-title">报告撰写</div>
+                                    <div class="activity-desc">生成专业研究报告</div>
+                                    <div class="activity-time">已完成</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // 替换最后一条消息
+            const messagesContainer = document.getElementById('chatMessages');
+            const lastMessage = messagesContainer.lastElementChild;
+            if (lastMessage) {
+                lastMessage.innerHTML = `
+                    <div class="message-avatar ai">👩‍💼</div>
+                    <div class="message-content">
+                        <div class="message-bubble ai">
+                            ${progressMessage}
+                            <div class="message-time ai">${new Date().toLocaleTimeString()}</div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // showNotification('深度研究已完成！', 'success');
+        }
+
+        // 切换结果显示
+        function toggleResults() {
+            const content = document.getElementById('resultsContent');
+            const btn = document.querySelector('.toggle-btn');
+            
+            if (content.classList.contains('show')) {
+                content.classList.remove('show');
+                btn.textContent = '▼';
+            } else {
+                content.classList.add('show');
+                btn.textContent = '▲';
+            }
+        }
+
+
+
+        // 修改研究计划
+        function modifyResearchPlan() {
+            // 隐藏上一次研究计划中的按钮
+            const planActions = document.querySelectorAll('.plan-actions');
+            planActions.forEach(action => {
+                action.style.display = 'none';
+            });
+            
+            // 显示编辑计划标签在输入框内
+            showEditPlanTag();
+        }
+
+        // 显示编辑计划标签
+        function showEditPlanTag() {
+            const editPlanTag = document.getElementById('editPlanTag');
+            const messageInput = document.getElementById('messageInput');
+            
+            editPlanTag.style.display = 'block';
+            messageInput.classList.add('with-edit-plan');
+            
+            // 聚焦到输入框
+            messageInput.focus();
+        }
+
+        // 移除编辑计划标签
+        function removeEditPlanTag() {
+            const editPlanTag = document.getElementById('editPlanTag');
+            const messageInput = document.getElementById('messageInput');
+            
+            editPlanTag.style.display = 'none';
+            messageInput.classList.remove('with-edit-plan');
+        }
+
+
+
+        // 修改研究范围
+        function modifyResearchScope() {
+            addMessage('请告诉我您希望调整的研究范围，比如：更关注国内市场还是国际市场？更关注技术层面还是市场层面？', 'ai');
+            removeEditPlanTag();
+        }
+
+        // 修改研究深度
+        function modifyResearchDepth() {
+            addMessage('请选择研究深度：\n1. 概览性分析（快速了解）\n2. 深度分析（详细研究）\n3. 专家级分析（最全面深入）', 'ai');
+            removeEditPlanTag();
+        }
+
+        // 修改研究重点
+        function modifyResearchFocus() {
+            addMessage('请告诉我您最关心的研究重点，比如：\n• 竞争对手分析\n• 市场趋势预测\n• 技术发展路线\n• 投资机会评估', 'ai');
+            removeEditPlanTag();
+        }
+
+        // 修改时间安排
+        function modifyResearchTimeline() {
+            addMessage('请选择您希望的研究时间：\n1. 快速分析（5-10分钟）\n2. 标准分析（15-20分钟）\n3. 深度分析（30分钟以上）', 'ai');
+            removeEditPlanTag();
+        }
+
+        // 取消修改
+        function cancelModification() {
+            addMessage('好的，保持原有研究计划不变。', 'ai');
+            removeEditPlanTag();
+        }
+
+
+
+        // 点击预制问题
+        function askQuestion(question) {
+            // 添加用户消息
+            addMessage(question, 'user');
+            
+            // 处理问题
+            processUserMessage(question);
+        }
+
+
+
+        // 下载报告
+        function downloadReport() {
+            showNotification('报告下载已开始...', 'info');
+            // 这里可以添加实际的下载逻辑
+        }
+
+        // 分享结果
+        function shareResults() {
+            showNotification('分享功能开发中...', 'warning');
+        }
+
+        // 创建消息元素
+        function createMessageElement(sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message';
+            
+            messageDiv.innerHTML = `
+                <div class="message-avatar ${sender}">${sender === 'ai' ? '👩‍💼' : '👤'}</div>
+                <div class="message-content">
+                    <div class="message-bubble ${sender}">
+                    </div>
+                </div>
+            `;
+            
+            return messageDiv;
+        }
+
+        // 添加消息到聊天
+        function addMessage(content, sender) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message';
+            
+            const time = new Date().toLocaleTimeString();
+            
+            messageDiv.innerHTML = `
+                <div class="message-avatar ${sender}">${sender === 'ai' ? '👩‍💼' : '👤'}</div>
+                <div class="message-content">
+                    <div class="message-bubble ${sender}">
+                        ${content}
+                        <div class="message-time ${sender}">${time}</div>
+                    </div>
+                </div>
+            `;
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // 逐字输出文本
+        function typeText(container, text, callback) {
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = text;
+            
+            let nodeIndex = 0;
+            const nodes = Array.from(tempDiv.childNodes);
+            
+            function processNode(node, parent) {
+                return new Promise((resolve) => {
+                    if (node.nodeType === Node.TEXT_NODE) {
+                        // 文本节点，逐字输出
+                        const text = node.textContent.trim();
+                        if (!text) {
+                            resolve();
+                            return;
+                        }
+                        
+                        const chars = text.split('');
+                        let currentIndex = 0;
+                        
+                        const textContainer = document.createElement('span');
+                        parent.appendChild(textContainer);
+                        
+                        const typeInterval = setInterval(() => {
+                            if (currentIndex < chars.length) {
+                                const charSpan = document.createElement('span');
+                                charSpan.textContent = chars[currentIndex];
+                                charSpan.className = 'char-by-char';
+                                charSpan.style.animationDelay = `${currentIndex * 30}ms`;
+                                textContainer.appendChild(charSpan);
+                                currentIndex++;
+                                
+                                // 滚动到底部
+                                const messagesContainer = document.getElementById('chatMessages');
+                                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                            } else {
+                                clearInterval(typeInterval);
+                                setTimeout(resolve, 200); // 短暂停顿
+                            }
+                        }, 30); // 更快的打字速度
+                        
+                    } else if (node.nodeType === Node.ELEMENT_NODE) {
+                        // 元素节点，创建对应元素
+                        const element = document.createElement(node.tagName);
+                        
+                        // 复制属性
+                        for (let attr of node.attributes) {
+                            element.setAttribute(attr.name, attr.value);
+                        }
+                        
+                        // 添加段落动画类
+                        if (node.tagName === 'DIV' || node.tagName === 'P' || node.tagName === 'LI') {
+                            element.className = (element.className + ' paragraph-typing').trim();
+                        }
+                        
+                        parent.appendChild(element);
+                        
+                        // 递归处理子节点
+                        const childPromises = [];
+                        for (let child of node.childNodes) {
+                            childPromises.push(processNode(child, element));
+                        }
+                        
+                        Promise.all(childPromises).then(resolve);
+                    } else {
+                        resolve();
+                    }
+                });
+            }
+            
+            async function processAllNodes() {
+                for (let node of nodes) {
+                    await processNode(node, container);
+                }
+                if (callback) callback();
+            }
+            
+            processAllNodes();
+        }
+
+        // 键盘事件处理
+        function handleKeyDown(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendMessage();
+            }
+        }
+
+        // 自动调整输入框高度
+        function autoResize(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = Math.min(textarea.scrollHeight, 100) + 'px';
+        }
+
+        // 显示通知
+        function showNotification(message, type = 'info') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                    }, 3000);
+        }
+
+        // 关闭聊天
+        function closeChat() {
+            if (confirm('确定要关闭聊天窗口吗？')) {
+                window.close();
+            }
+        }
+
+        // 添加信息图标
+        const infoIcon = document.createElement('div');
+        infoIcon.innerHTML = 'i';
+        infoIcon.style.cssText = `
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            width: 16px;
+            height: 16px;
+            background: #f8f9fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #999;
+            cursor: pointer;
+            border: 1px solid #e9ecef;
+            font-style: italic;
+            font-weight: bold;
+        `;
+        document.querySelector('.input-section').appendChild(infoIcon);
+    </script>
+</body>
+</html> 
