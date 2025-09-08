@@ -1,0 +1,26 @@
+End User License Agreement (EULA)
+
+IMPORTANT: Please read this agreement carefully before using this software. By installing or using this software, you agree to the terms below.
+
+1. License Grant
+   This software is developed and provided for free by [Your Name/Company] (“Licensor”). You (“Licensee”) are granted the right to use this software at no cost, including for personal and commercial purposes.
+
+2. Intellectual Property
+   All rights, title, and interest in and to the software (including but not limited to source code, object code, interface design, and related documentation) remain with the Licensor. The source code is not publicly available.
+
+3. Restrictions
+   Licensee shall not decompile, disassemble, reverse engineer, or otherwise attempt to access the source code.
+   Modification, sublicensing, or creation of derivative works based on this software is strictly prohibited without written permission from the Licensor.
+
+4. Limitation of Liability
+   This software is provided “as is” without warranty of any kind. The Licensor shall not be liable for any direct or indirect damages arising from the use of this software.
+
+5. Termination
+   The Licensor may terminate this agreement immediately if the Licensee violates any terms of this agreement.
+
+6. Governing Law
+   This agreement shall be governed by and construed in accordance with the laws of [Your Country/Region].
+
+---
+
+This software is closed-source and free for commercial use.
