@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人知识库配置</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f6f7;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .section {
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1f2329;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            width: 150px;
+            font-size: 14px;
+            color: #646a73;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .form-label .info-icon {
+            color: #8f959e;
+            cursor: help;
+            font-size: 12px;
+        }
+
+        .form-control {
+            flex: 1;
+        }
+
+        select, input[type="text"], input[type="number"] {
+            width: 100%;
+            height: 36px;
+            padding: 0 12px;
+            border: 1px solid #dee0e3;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #1f2329;
+            background-color: white;
+            transition: border-color 0.2s;
+        }
+
+        select:hover, input:hover {
+            border-color: #c9cdd4;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: #3370ff;
+            box-shadow: 0 0 0 3px rgba(51, 112, 255, 0.1);
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #dee0e3;
+            transition: 0.3s;
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: #3370ff;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(20px);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 32px;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .radio-item input[type="radio"] {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .radio-item label {
+            font-size: 14px;
+            color: #1f2329;
+            cursor: pointer;
+        }
+
+        .config-box {
+            border: 1px solid #dee0e3;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
+            background-color: #fafbfc;
+        }
+
+        .config-box-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1f2329;
+            margin-bottom: 20px;
+        }
+
+        .divider {
+            height: 1px;
+            background-color: #e3e5e8;
+            margin: 24px 0;
+        }
+
+        .modal-section {
+            margin-bottom: 24px;
+        }
+
+        .modal-section-title {
+            font-size: 14px;
+            color: #1f2329;
+            margin-bottom: 16px;
+            padding-left: 8px;
+            border-left: 3px solid #3370ff;
+            font-weight: 500;
+        }
+
+        .example-text {
+            font-size: 12px;
+            color: #8f959e;
+            margin-left: 8px;
+        }
+
+        .required {
+            color: #ff6b6b;
+            margin-left: 4px;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .config-panels {
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .config-panels.hidden {
+            max-height: 0;
+            opacity: 0;
+            margin: 0;
+        }
+
+        .config-panels.visible {
+            max-height: 2000px;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="section">
+            <div class="section-title">个人知识库配置</div>
+            
+            <div class="form-group">
+                <div class="form-label">
+                    个人知识库开关
+                </div>
+                <div class="form-control">
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="knowledgeBaseEnabled" onchange="toggleConfigPanels()">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- 配置面板区域 -->
+        <div id="configPanels" class="config-panels hidden">
+            <div class="section">
+                <div class="config-box">
+                    <div class="config-box-title">保存时的配置</div>
+                    
+                    <!-- 分段规则直接展开 -->
+                    <div class="modal-section">
+                        <div class="modal-section-title">分段规则</div>
+                        
+                        <div class="form-group">
+                            <div class="form-label">
+                                分段规则
+                                <span class="required">*</span>
+                            </div>
+                            <div class="form-control">
+                                <div class="radio-group">
+                                    <div class="radio-item">
+                                        <input type="radio" id="autoChunk" name="chunkType" value="auto" onchange="updateChunkConfig()">
+                                        <label for="autoChunk">自动分段 <span class="info-icon">ⓘ</span></label>
+                                    </div>
+                                    <div class="radio-item">
+                                        <input type="radio" id="customChunk" name="chunkType" value="custom" checked onchange="updateChunkConfig()">
+                                        <label for="customChunk">自定义分段 <span class="info-icon">ⓘ</span></label>
+                                    </div>
+                                    <div class="radio-item">
+                                        <input type="radio" id="hierarchyChunk" name="chunkType" value="hierarchy" onchange="updateChunkConfig()">
+                                        <label for="hierarchyChunk">层级分段 <span class="info-icon">ⓘ</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 自定义分段配置 -->
+                    <div class="modal-section" id="customChunkConfig">
+                        <div class="modal-section-title">自定义分段配置</div>
+                        
+                        <div class="form-group">
+                            <div class="form-label">
+                                分段标识符
+                                <span class="required">*</span>
+                            </div>
+                            <div class="form-control">
+                                <input type="text" id="separator" value="\n" placeholder="例如: \n">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-label">
+                                最大分块长度%
+                                <span class="required">*</span>
+                            </div>
+                            <div class="form-control">
+                                <input type="number" id="maxChunkSize" value="800" min="100" max="2000" placeholder="例如: 800">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-label">
+                                分块重叠度
+                                <span class="required">*</span>
+                            </div>
+                            <div class="form-control">
+                                <input type="number" id="chunkOverlapDegree" value="10" min="0" max="100" placeholder="例如: 10">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-label">分块重叠数</div>
+                            <div class="form-control">
+                                <input type="number" id="chunkOverlap" value="80" min="0" placeholder="例如: 80">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-label">移除多余空格</div>
+                            <div class="form-control">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="removeExtraSpaces">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-label">移除URL和邮箱</div>
+                            <div class="form-control">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="removeUrlsEmails">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 层级分段配置 -->
+                    <div class="modal-section" id="hierarchyChunkConfig" style="display: none;">
+                        <div class="modal-section-title">层级分段配置</div>
+                        
+                        <div class="form-group">
+                            <div class="form-label">
+                                分段层级
+                                <span class="required">*</span>
+                            </div>
+                            <div class="form-control">
+                                <input type="number" id="hierarchyLevel" value="3" min="1" max="10" placeholder="例如: 3">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-label">检索切片保留层级关系</div>
+                            <div class="form-control">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="keepHierarchy">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="config-box">
+                    <div class="config-box-title">搜索时的配置</div>
+                    
+                    <div class="form-group">
+                        <div class="form-label">检索策略</div>
+                        <div class="form-control">
+                            <select id="retrieverStrategy">
+                                <option value="vector">向量检索</option>
+                                <option value="keyword">关键词检索</option>
+                                <option value="hybrid" selected>混合检索</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-label">最大返回数量</div>
+                        <div class="form-control">
+                            <input type="number" id="maxReturnCount" value="5" min="1" max="50">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-label">最小匹配度</div>
+                        <div class="form-control">
+                            <input type="number" id="minMatchDegree" value="0.5" min="0" max="1" step="0.1">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-label">查询改写</div>
+                        <div class="form-control">
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="queryRewrite">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-label">结果重排序</div>
+                        <div class="form-control">
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="resultRerank">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 切换配置面板显示/隐藏
+        function toggleConfigPanels() {
+            const enabled = document.getElementById('knowledgeBaseEnabled').checked;
+            const panels = document.getElementById('configPanels');
+            
+            if (enabled) {
+                panels.classList.remove('hidden');
+                panels.classList.add('visible');
+            } else {
+                panels.classList.remove('visible');
+                panels.classList.add('hidden');
+            }
+        }
+
+        // 更新分段配置显示
+        function updateChunkConfig() {
+            const chunkType = document.querySelector('input[name="chunkType"]:checked').value;
+            const customConfig = document.getElementById('customChunkConfig');
+            const hierarchyConfig = document.getElementById('hierarchyChunkConfig');
+            
+            if (chunkType === 'custom') {
+                customConfig.style.display = 'block';
+                hierarchyConfig.style.display = 'none';
+            } else if (chunkType === 'hierarchy') {
+                customConfig.style.display = 'none';
+                hierarchyConfig.style.display = 'block';
+            } else {
+                customConfig.style.display = 'none';
+                hierarchyConfig.style.display = 'none';
+            }
+        }
+
+        // 获取完整配置
+        function getFullConfig() {
+            const enabled = document.getElementById('knowledgeBaseEnabled').checked;
+            
+            if (!enabled) {
+                return {
+                    enabled: false,
+                    retriever: {
+                        strategy: null,
+                        maxReturnCount: 5,
+                        minMatchDegree: 0.5,
+                        queryRewrite: false,
+                        resultRerank: false
+                    },
+                    strategy: null
+                };
+            }
+
+            const config = {
+                enabled: true,
+                retriever: {
+                    strategy: document.getElementById('retrieverStrategy').value,
+                    maxReturnCount: parseInt(document.getElementById('maxReturnCount').value),
+                    minMatchDegree: parseFloat(document.getElementById('minMatchDegree').value),
+                    queryRewrite: document.getElementById('queryRewrite').checked,
+                    resultRerank: document.getElementById('resultRerank').checked
+                },
+                strategy: getChunkStrategy()
+            };
+
+            return config;
+        }
+
+        // 获取分段策略配置
+        function getChunkStrategy() {
+            const chunkType = document.querySelector('input[name="chunkType"]:checked').value;
+            
+            if (chunkType === 'custom') {
+                return {
+                    type: 'custom',
+                    separator: document.getElementById('separator').value,
+                    maxChunkSize: parseInt(document.getElementById('maxChunkSize').value),
+                    chunkOverlapDegree: parseInt(document.getElementById('chunkOverlapDegree').value),
+                    chunkOverlap: parseInt(document.getElementById('chunkOverlap').value),
+                    removeExtraSpaces: document.getElementById('removeExtraSpaces').checked,
+                    removeUrlsEmails: document.getElementById('removeUrlsEmails').checked
+                };
+            } else if (chunkType === 'hierarchy') {
+                return {
+                    type: 'hierarchy',
+                    hierarchyLevel: parseInt(document.getElementById('hierarchyLevel').value),
+                    keepHierarchy: document.getElementById('keepHierarchy').checked
+                };
+            } else {
+                return {
+                    type: 'auto'
+                };
+            }
+        }
+
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', function() {
+            // 默认隐藏配置面板
+            toggleConfigPanels();
+        });
+
+        // 监听配置变化，自动打印到控制台
+        document.addEventListener('change', function() {
+            console.log('当前配置:', getFullConfig());
+        });
+    </script>
+</body>
+</html>
