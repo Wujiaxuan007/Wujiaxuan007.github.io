@@ -248,6 +248,17 @@
         <!-- 配置面板区域 -->
         <div id="configPanels" class="config-panels hidden">
             <div class="section">
+                <div class="form-group">
+                    <div class="form-label">集合名称</div>
+                    <div class="form-control">
+                        <input type="text" id="collectionName" value="personal_knowledge_base" placeholder="请输入集合名称">
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section">
                 <div class="config-box">
                     <div class="config-box-title">分段配置</div>
                     
@@ -459,6 +470,7 @@
             if (!enabled) {
                 return {
                     enabled: false,
+                    collectionName: 'personal_knowledge_base',
                     retriever: {
                         strategy: null,
                         maxReturnCount: 5,
@@ -472,6 +484,7 @@
 
             const config = {
                 enabled: true,
+                collectionName: document.getElementById('collectionName').value,
                 retriever: {
                     strategy: document.getElementById('retrieverStrategy').value,
                     maxReturnCount: parseInt(document.getElementById('maxReturnCount').value),
