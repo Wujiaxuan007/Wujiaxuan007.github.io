@@ -28,11 +28,26 @@
             padding: 30px;
         }
 
+        .function-description {
+            padding: 15px 20px;
+            background: #e6f7ff;
+            border: 1px solid #91d5ff;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .function-description-text {
+            font-size: 14px;
+            color: #1890ff;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
         .switch-container {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 20px;
+            padding: 15px 20px;
             background: #fafafa;
             border: 1px solid #e8e8e8;
             border-radius: 6px;
@@ -359,9 +374,15 @@
 </head>
 <body>
     <div class="container">
+        <!-- 功能描述 -->
+        <div class="function-description">
+            <div class="function-description-text">当对话中包含附件（主要用于创建或修改数据场景）时，系统会按下述配置自动将附件及其工具调用链路模板化，生成可复用的处理模板。
+                遇到相同结构的附件时，可直接复用模板，跳过 LLM 推理环节，从而降低 token 成本并提升处理效率。</div>
+        </div>
+
         <!-- 总开关 -->
         <div class="switch-container">
-            <span class="switch-label">附件自动模板化开关</span>
+            <span class="switch-label">自动模板化开关</span>
             <label class="switch">
                 <input type="checkbox" id="mainSwitch" onchange="toggleConfig()">
                 <span class="slider"></span>
@@ -370,15 +391,15 @@
 
         <!-- 配置内容 -->
         <div class="config-content-wrapper" id="configContent">
-        <!-- 一、附件模版化触发保存条件 -->
+        <!-- 一、附件和调用链路模板化触发保存条件 -->
         <div class="section">
             <div class="section-title">
-                附件模版化触发保存条件
+                调用链路模板化触发保存条件
                 <span class="help-icon">?
                     <span class="tooltip">
                         表格附件 vs 非表格附件的区别：<br><br>
                         <strong>表格附件（Excel等）：</strong><br>
-                        结构清晰，可直接读取列名和数据结构，处理效率高，适合模板化。<br><br>
+                        结构清晰，可直接读取列名和数据结构，处理效率高，适合将附件和调用链路模板化。<br><br>
                         <strong>非表格附件（PDF/图片/文档等）：</strong><br>
                         需要调用 LLM 提取结构信息，处理成本较高。对于简单任务，模板化的优化效果有限，因此需要更高的触发阈值（≥2次工具调用）才保存为临时模板，避免为简单任务创建不必要的模板。
                     </span>
@@ -392,7 +413,7 @@
                         表格类附件触发条件
                         <span class="required">*</span>
                         <span class="help-icon">?
-                            <span class="tooltip">说明：当上传的 <strong>表格附件</strong> 在处理过程中需要调用的工具数量 <strong>超过该值</strong> 时，系统会自动保存为临时模板。</span>
+                            <span class="tooltip">说明：当上传的 <strong>表格附件</strong> 在处理过程中需要调用的工具数量 <strong>超过该值</strong> 时，系统会自动将附件和整个工具调用链路保存为临时模板。</span>
                         </span>
                     </div>
                     <div class="config-content">
@@ -408,7 +429,7 @@
                         非表格类附件触发条件
                         <span class="required">*</span>
                         <span class="help-icon">?
-                            <span class="tooltip">说明：当附件为 <strong>非表格类型（PDF / 图片 / 文档等）</strong>，在处理过程中调用的工具数量 <strong>大于或等于该值</strong> 时，会自动保存为临时模板。</span>
+                            <span class="tooltip">说明：当附件为 <strong>非表格类型（PDF / 图片 / 文档等）</strong>，在处理过程中调用的工具数量 <strong>大于或等于该值</strong> 时，会自动将附件和整个工具调用链路保存为临时模板。</span>
                         </span>
                     </div>
                     <div class="config-content">
@@ -429,7 +450,7 @@
                 临时模板转持久化策略
                 <span class="help-icon">?
                     <span class="tooltip">
-                        临时模板用于观察附件处理模式，只有被多次使用的才会转为持久化模板，避免为一次性需求创建不必要的模板。
+                        临时模板用于观察附件和调用链路的处理模式，只有被多次使用的才会转为持久化模板，避免为一次性需求创建不必要的模板。
                     </span>
                 </span>
             </div>
