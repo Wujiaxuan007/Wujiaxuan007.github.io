@@ -7,7 +7,7 @@
   <title>卖话的人 · 2015—2020</title>
   <link rel="stylesheet" href="./styles.css" />
   <link rel="stylesheet" href="./reading.css" />
-  <link rel="stylesheet" href="./stats.css" />
+  <link rel="stylesheet" href="./stats.css?v=20260915-2" />
 </head>
 <body>
   <header class="masthead">
@@ -52,7 +52,7 @@
 
   <script src="./app.js"></script>
   <script src="./source-audit.js"></script>
-  <script src="./stats.js"></script>
+  <script src="./stats.js?v=20260915-2"></script>
   <script>
     const desktopReading = window.matchMedia('(min-width: 901px)');
     let catalogPageScroll = 0;
@@ -76,8 +76,6 @@
       markActiveWork(id);
 
       if (desktopReading.matches) {
-        // Reading mode is a viewport workspace: left and right scroll independently.
-        // Always start the selected poem at its top, while keeping the catalog's own position.
         requestAnimationFrame(() => {
           window.scrollTo(0, 0);
           reader.scrollTop = 0;
