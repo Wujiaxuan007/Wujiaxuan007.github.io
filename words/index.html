@@ -54,5 +54,21 @@
   <div class="scrim" id="scrim" hidden></div>
 
   <script src="./app.js"></script>
+  <script>
+    // 桌面端保持左侧目录位置，只替换右侧阅读区；移动端仍使用原来的单栏阅读行为。
+    document.addEventListener('click', function (event) {
+      if (!window.matchMedia('(min-width: 901px)').matches) return;
+      const link = event.target.closest('[data-id]');
+      if (!link) return;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      const originalScroll = reader.scrollIntoView;
+      reader.scrollIntoView = function () {};
+      showWork(link.dataset.id);
+      reader.scrollIntoView = originalScroll;
+      document.querySelectorAll('[data-id].is-active').forEach(el => el.classList.remove('is-active'));
+      document.querySelectorAll(`[data-id="${link.dataset.id}"]`).forEach(el => el.classList.add('is-active'));
+    }, true);
+  </script>
 </body>
 </html>
