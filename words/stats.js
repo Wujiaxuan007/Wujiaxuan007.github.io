@@ -41,9 +41,11 @@ function ensureStatsBar(poemId) {
 
   let bar = poem.querySelector('.poem-stats');
   if (!bar) {
+    const meta = poem.querySelector('.poem-meta');
+    if (!meta) return null;
+
     bar = document.createElement('div');
     bar.className = 'poem-stats';
-    const actions = poem.querySelector('.poem-actions');
     bar.innerHTML = `
       <span class="poem-views" aria-label="浏览次数"><span data-stats-views>—</span> 次浏览</span>
       <span class="poem-stats-separator" aria-hidden="true">·</span>
@@ -51,8 +53,7 @@ function ensureStatsBar(poemId) {
         <span class="poem-like-icon" aria-hidden="true">♡</span>
         <span data-stats-likes>—</span>
       </button>`;
-    if (actions) poem.insertBefore(bar, actions);
-    else poem.appendChild(bar);
+    meta.appendChild(bar);
   }
   bar.dataset.poemId = poemId;
   return bar;
