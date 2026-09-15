@@ -1,5 +1,5 @@
 const works = [
-  {"id": "nanfang", "title": "南方姑娘", "date": "2015.05.20", "layout": "left narrow"},
+  {"id": "nanfang", "title": "南方姑娘", "date": "2015.05.20", "layout": "left narrow", "body": "她绑辫子的橡皮筋，\n有时她会环在手上，\n我会想象她扎头发的模样，\n一遍一遍一遍，\n直到下课铃响。\n她的手表真的漂亮，\n而我的手表，\n只记得时间飞跑。\n哈哈哈哈哈哈哈哈。\n\n我不曾想过远走他乡，\n却为她前去南方，\n她说那边山很漂亮，\n我却满眼她的面庞。\n\n我不曾想过背井离乡，\n却为她追过太阳，\n她说她喜欢鱼香，\n我就收起我的翅膀。\n\n我以为日子会一直这样漫长，\n她也会在一直在我身旁。\n那天她穿上了漂亮衣裳，\n却和他拜了高堂。\n我留下了来时的行囊，\n回到了我的北方。"},
   {"id": "xing", "title": "醒", "date": "2015.06.01", "layout": "left narrow", "body": "一身灰色舞衣，\n在木屋里骄纵身影。\n酒酒酒酒酒，\n这玩意儿，\n醉不醉全听心情。\n疯狂电视雪花声音，\n为在黑白电影里安静睡去。\n摇晃身体在梦里拉扯自己。\n酒杯碎了碎了碎了，\n而你飞了飞了飞了。\n你用你的燕尾划破我的掌心，\n我握着你的羽毛愈梦愈醒。\n蒙黑的天有你有你，\n我被下咒拼命想你。\n你有沙哑性感的嗓音，\n我在屋里却听的怪异。\n你有黑色模糊的背影，\n我在梦里却看的仔细。\n你真的走了走了走了，\n我还是不想醒。"},
   {"id": "cunzhuang", "title": "村长女儿", "date": "2015.06.08", "layout": "center airy", "body": "你就把花穿身上，\n你就把油抹鞋上。\n我就看看你，\n就看看而已。\n我二手了辆拉风的摩托车，\n它哼哼哈嘿，\n我载你去山穷水尽。\n你父亲哼哼唧唧，\n我怕了他的大巴掌，\n更怕没了你的小手帕。\n乡亲们歪歪唧唧，\n我偏要给你戴上一朵山楂花。\n三月的天还没六月，\n阿黑却吐着舌头像条狗，\n让我和它飞扬尘土架村口，\n让我拐你走。\n你貌美如花，\n又不鸣鸣哇哇，\n阿黑想带你去嘻嘻哈哈，\n就让我拐你走吧。"},
   {"id": "gou-guantou", "title": "狗罐头", "date": "2015.06.20", "layout": "left narrow", "body": "罐头里面没有沙丁鱼\n我也没有养猫咪\n却有只爱吃鱼的你\n\n罐头里面有牛肉粒\n我却没有养条狗\n只有个爱吃肉的我\n\n第一天\n左手提支玫瑰的就是你\n我用狗罐头作为见面礼\n你收下了却说你只吃鱼\n\n第二天\n白衬衫上带点咖啡痕迹的你\n用沙丁鱼罐头作为回礼\n我收下了没说我不吃鱼\n\n第三天\n我们没见面了\n\n第四天\n我们都饿死了"},
@@ -17,7 +17,7 @@ const works = [
   {"id": "yuguang", "title": "余光", "date": "2017.11", "layout": "center airy", "body": "住在余光里的姑娘\n\n她喜欢穿带花的衣裳\n\n坐她前方的少年郎\n\n他没去过东南西北方\n\n白天是她\n\n目光闪烁着日光\n\n太阳是他\n\n余光对焦着对方\n\n黑夜是我\n\n一切未知起源于我\n\n月亮是我\n\n一切施舍来自于我\n\n是时间杀死了她\n\n是时间杀死了他\n\n是他们杀死了我"},
   {"id": "deqinghu", "title": "我在德清湖晒太阳", "date": "2017.12.22", "layout": "left narrow airy", "body": "我在德清湖晒太阳\n安静地像一棵雕像\n黑天鹅朝着我奔跑\n它没有白来这一趟\n\n我在岸边算个大明星\n水底数不尽的摄像机\n我就拜托鱼儿\n鱼儿把话忘在了路上\n我再拜托风儿\n风儿把话吹给了太阳\n\n阳光阿你可真多情\n你牵着我的手又吻别人的额头\n你还没经过我背后\n就躺在别人的胸口\n\n阳光阿我恨你无声息的长眠\n我恨你长眠后的稀薄\n我恨你稀薄后的火热\n我恨你火热后的坠落\n我恨你坠落后的黑色\n\n太阳听了很生气\n黑着脸就西去\n我在德清湖追太阳\n看不见天鹅\n看不见鱼\n看不见湖面的摄像机"},
   {"id": "pinganye", "title": "平安夜", "date": "2017.12.24", "layout": "center airy", "body": "无家可归的托尼\n和被追杀的杰瑞\n缩在没人要的仓库里\n托尼告诉杰瑞\n他最爱祖母做的班尼迪克蛋\n杰瑞告诉托尼\n他最爱长头发的枪炮与玫瑰\n\n蜕皮沙发底\n同样没人要的火柴盒里\n第一根火柴\n老花镜奶奶抱着烤火鸡\n托尼记得这围裙\n后背永远无解的谜\n第二根火柴\n杰瑞看见\n一个名为露丝的女人\n牵着一条叫托尼的狗\n第三根火柴\n救了一个小女孩\n所以今晚平安夜"},
-  {"id": "0333", "title": "凌晨三三十三", "date": "2018.03.14", "layout": "center airy"},
+  {"id": "0333", "title": "凌晨三三十三", "date": "2018.03.14", "layout": "center airy", "body": "比基尼池的比丘，\n说日落打伞比较重。\n长眼毛的老斑鸠，\n啄破了一个黄皮球，\n一声巨响弄黑了所有，\n唯独六年前的红豆豆。\n黑色的屋放出了，\n凌晨三三十三的面容。\n黑色的鸟搅拌着，\n凌晨三三十三的稀稠。\n黑色的河静止着，\n凌晨三三十三的温柔。\n黑色的树杀死了，\n凌晨三三十三的小丑。\n比丘和老斑鸠，\n还有跪在地上的人，\n都在等凌晨三三十三的落日回头。"},
   {"id": "kandao", "title": "看到看不到它", "date": "2018.09.23", "layout": "center airy", "body": "推开木门，\n是一面镜子。\n它印着我的样子，\n和我的过去如此。\n绕过镜子，\n是一杯蜡烛。\n它看起来黏黏糊糊，\n又百般的孤独。\n吹灭蜡烛，\n是一扇窗户。\n它是我的眼睛，\n是我看外面的窗户。\n关上窗户，\n他告诉我会是一个美梦。\n他是谁？\n那个把上窗户走掉的人。"},
   {"id": "jiahua", "title": "假话", "date": "2018.11.17", "layout": "center airy", "body": "从来\n到怀揣心事\n他安静地望着窗外\n他说\n夜里的云是黑的\n可白天不同\n水里的鱼是活的\n可热水不同\n这里的人是真的\n可那里不同\n这里\n云变黑了掉进水里溅起了鱼儿\n鱼儿把飞去咬云的耳朵\n那里\n没有云\n没有鱼\n夜让他成人\n水叫他成人\n他说过哪句假话\n他说过哪句假话"},
   {"id": "jingguo", "title": "你经过我经过你", "date": "2018.11.26", "layout": "center airy", "body": "在下雨\n你来的每一回都在下雨\n我们赤裸着身体\n空调吹来一世界的凉意\n\n在打雷\n你来的每一回都在打雷\n我们占据着身体\n闪电从滨江钻进萧山西\n\n在灯里\n你来的每一回都在灯里\n我们疲软着身体\n窗帘盖住了月亮和星星\n\n在天光\n你来的每一回都在天光\n我们拥抱着身体\n没有多余的手舔冰淇淋"},
@@ -61,7 +61,6 @@ function renderTimeline() {
 }
 
 function fishMarkup(text) {
-  // 以原稿的逐行文本为 SSOT；宽度只负责还原鱼形轮廓，不改动任何字。
   const widths = [34, 44, 56, 68, 78, 88, 96, 100, 94, 84, 72, 58, 44];
   return text.split('\n')
     .map((line, i) => `<span class="fish-line" style="width:${widths[i] || 70}%">${escapeHtml(line) || '&nbsp;'}</span>`)
@@ -79,70 +78,31 @@ function bodyMarkup(work) {
 function showWork(id, push = true) {
   const work = works.find(item => item.id === id);
   if (!work) return;
-
-  const layoutClasses = work.layout
-    .split(/\s+/)
-    .filter(Boolean)
-    .map(name => `layout-${name}`)
-    .join(' ');
-
+  const layoutClasses = work.layout.split(/\s+/).filter(Boolean).map(name => `layout-${name}`).join(' ');
   reader.className = `reader active ${layoutClasses}`;
   reader.innerHTML = `<article class="poem-wrap">
-    <header class="poem-head">
-      <h2 class="poem-title">${escapeHtml(work.title)}</h2>
-      <div class="poem-meta">${escapeHtml(work.date)}<br>@卖话的人</div>
-    </header>
+    <header class="poem-head"><h2 class="poem-title">${escapeHtml(work.title)}</h2><div class="poem-meta">${escapeHtml(work.date)}<br>@卖话的人</div></header>
     <div class="poem-body">${bodyMarkup(work)}</div>
-    <div class="poem-actions">
-      <button type="button" data-action="back">← 回到时间线</button>
-      <button type="button" data-action="top">回到顶部 ↑</button>
-    </div>
+    <div class="poem-actions"><button type="button" data-action="back">← 回到时间线</button><button type="button" data-action="top">回到顶部 ↑</button></div>
   </article>`;
-
   if (push) history.pushState({id}, '', `#${id}`);
   reader.scrollIntoView({behavior:'smooth', block:'start'});
   closeDrawer();
 }
 
-function openDrawer() {
-  drawer.classList.add('open');
-  drawer.setAttribute('aria-hidden', 'false');
-  scrim.hidden = false;
-  document.body.classList.add('lock');
-  document.querySelector('#indexToggle').setAttribute('aria-expanded', 'true');
-}
-
-function closeDrawer() {
-  drawer.classList.remove('open');
-  drawer.setAttribute('aria-hidden', 'true');
-  scrim.hidden = true;
-  document.body.classList.remove('lock');
-  document.querySelector('#indexToggle').setAttribute('aria-expanded', 'false');
-}
+function openDrawer() {drawer.classList.add('open');drawer.setAttribute('aria-hidden','false');scrim.hidden=false;document.body.classList.add('lock');document.querySelector('#indexToggle').setAttribute('aria-expanded','true');}
+function closeDrawer() {drawer.classList.remove('open');drawer.setAttribute('aria-hidden','true');scrim.hidden=true;document.body.classList.remove('lock');document.querySelector('#indexToggle').setAttribute('aria-expanded','false');}
 
 document.addEventListener('click', event => {
   const link = event.target.closest('[data-id]');
-  if (link) {
-    event.preventDefault();
-    showWork(link.dataset.id);
-    return;
-  }
-  if (event.target.matches('[data-action="back"]')) {
-    timeline.scrollIntoView({behavior:'smooth', block:'start'});
-  }
-  if (event.target.matches('[data-action="top"]')) {
-    document.querySelector('#top').scrollIntoView({behavior:'smooth', block:'start'});
-  }
+  if (link) {event.preventDefault();showWork(link.dataset.id);return;}
+  if (event.target.matches('[data-action="back"]')) timeline.scrollIntoView({behavior:'smooth',block:'start'});
+  if (event.target.matches('[data-action="top"]')) document.querySelector('#top').scrollIntoView({behavior:'smooth',block:'start'});
 });
 
 document.querySelector('#indexToggle').addEventListener('click', openDrawer);
 document.querySelector('#drawerClose').addEventListener('click', closeDrawer);
 scrim.addEventListener('click', closeDrawer);
-window.addEventListener('popstate', () => {
-  const id = location.hash.slice(1);
-  if (id) showWork(id, false);
-});
-
+window.addEventListener('popstate', () => {const id=location.hash.slice(1);if(id)showWork(id,false);});
 renderTimeline();
-const initial = location.hash.slice(1);
-if (initial) showWork(initial, false);
+const initial=location.hash.slice(1);if(initial)showWork(initial,false);
