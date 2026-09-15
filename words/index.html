@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="卖话的人 · 2015—2020 文字档案" />
+  <title>卖话的人 · Archive</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="masthead">
+    <a class="back" href="/" aria-label="返回主页">←</a>
+    <div class="brand">卖话的人</div>
+    <button class="index-toggle" id="indexToggle" type="button" aria-expanded="false">目录</button>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <p class="eyebrow">ARCHIVE · 2015—2020</p>
+      <h1>卖话的人</h1>
+      <p class="hero-copy">留下来的话。</p>
+      <p class="hero-note">原文不改，原排版尽量重建。2026 年，重新打开。</p>
+    </section>
+
+    <section class="timeline" id="timeline" aria-label="作品时间线"></section>
+    <section class="reader" id="reader" aria-live="polite"></section>
+
+    <footer class="footer">
+      <p>1995 —</p>
+      <p>Archive reopened in 2026.</p>
+    </footer>
+  </main>
+
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-head">
+      <strong>作品目录</strong>
+      <button id="drawerClose" type="button" aria-label="关闭目录">×</button>
+    </div>
+    <nav id="drawerList"></nav>
+  </aside>
+  <div class="scrim" id="scrim" hidden></div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
