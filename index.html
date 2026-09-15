@@ -3,84 +3,22 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Jacin Woo 的个人主页：工程、作品，以及重新打开的文字档案。" />
+  <meta name="description" content="Jacin Woo 的个人主页。工程、文字，以及一些被时间留下来的东西。" />
   <meta property="og:title" content="Jacin Woo" />
-  <meta property="og:description" content="工程、作品，以及重新打开的文字档案。" />
+  <meta property="og:description" content="工程、文字，以及一些被时间留下来的东西。" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="/og.png" />
   <title>Jacin Woo</title>
   <link rel="icon" href="/favicon.svg" />
   <style>
-    :root{
-      --paper:#f5f1e8;
-      --paper-2:#ece6d9;
-      --ink:#211f1a;
-      --muted:#706b61;
-      --line:rgba(33,31,26,.14);
-      --green:#2f645b;
-      --green-soft:#dce9e5;
-      --serif:"Songti SC","STSong","Noto Serif SC",Georgia,serif;
-      --sans:Inter,"PingFang SC","Microsoft YaHei",Arial,sans-serif;
-      --mono:"SFMono-Regular",Consolas,monospace;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
-    a{color:inherit;text-decoration:none}
-    .archive-strip{display:flex;justify-content:center;align-items:center;gap:10px;min-height:38px;padding:8px 18px;background:var(--ink);color:var(--paper);font-size:13px;letter-spacing:.03em}
-    .archive-strip span{opacity:.62}
-    .archive-strip a{border-bottom:1px solid rgba(245,241,232,.45);padding-bottom:1px}
-    .shell{max-width:1180px;margin:0 auto;padding:0 32px}
-    .nav{height:84px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
-    .name{font-family:var(--serif);font-size:19px;letter-spacing:.04em}
-    .navlinks{display:flex;align-items:center;gap:26px;color:var(--muted);font-size:14px}
-    .navlinks a:hover{color:var(--ink)}
-    .hero{padding:clamp(78px,10vw,150px) 0 clamp(76px,9vw,132px)}
-    .hero-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);gap:clamp(44px,8vw,120px);align-items:end}
-    .eyebrow{margin:0 0 24px;color:var(--green);font:12px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase}
-    h1{font-family:var(--serif);font-weight:400;font-size:clamp(68px,11vw,148px);line-height:.86;letter-spacing:-.055em;margin:0}
-    .hero-copy{max-width:690px;margin:34px 0 0;font-family:var(--serif);font-size:clamp(22px,2.8vw,34px);line-height:1.58}
-    .hero-side{padding-bottom:8px}
-    .hero-side p{margin:0;color:var(--muted);font-size:15px;line-height:1.85}
-    .hero-side .small{margin-top:20px;font:12px/1.7 var(--mono);color:#8a8478}
-    .section{padding:84px 0;border-top:1px solid var(--line)}
-    .section-head{display:grid;grid-template-columns:180px 1fr;gap:30px;margin-bottom:42px}
-    .section-kicker{font:12px/1.4 var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
-    .section-title{font-family:var(--serif);font-weight:400;font-size:clamp(34px,5vw,62px);line-height:1.08;margin:0;max-width:760px}
-    .doors{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-    .door{position:relative;min-height:320px;border:1px solid var(--line);padding:28px;display:flex;flex-direction:column;justify-content:space-between;transition:.22s ease;background:rgba(255,255,255,.12)}
-    .door:hover{transform:translateY(-3px);background:rgba(255,255,255,.38)}
-    .door.words{background:var(--green-soft)}
-    .door .meta{font:12px/1.4 var(--mono);color:var(--muted);letter-spacing:.08em}
-    .door h3{font-family:var(--serif);font-weight:400;font-size:clamp(42px,6vw,76px);line-height:1;margin:0 0 16px}
-    .door p{max-width:480px;color:var(--muted);line-height:1.75;margin:0}
-    .door .arrow{font-size:28px;position:absolute;right:26px;top:22px}
-    .work-list{display:grid}
-    .work-row{display:grid;grid-template-columns:160px minmax(0,1fr) auto;gap:24px;align-items:center;padding:22px 0;border-top:1px solid var(--line)}
-    .work-row:last-child{border-bottom:1px solid var(--line)}
-    .work-kind{font:12px/1.4 var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
-    .work-row h3{font-family:var(--serif);font-weight:400;font-size:25px;margin:0 0 6px}
-    .work-row p{margin:0;color:var(--muted);font-size:14px;line-height:1.55}
-    .work-row .go{font-size:20px;color:var(--muted)}
-    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px}
-    .about-grid p{margin:0;font-family:var(--serif);font-size:20px;line-height:1.9}
-    .about-grid .facts{font-family:var(--sans);font-size:14px;color:var(--muted);line-height:1.9}
-    .footer{padding:44px 0 70px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:24px;color:var(--muted);font-size:13px}
-    .footer-links{display:flex;gap:18px}
-    @media(max-width:780px){
-      .shell{padding:0 20px}
-      .nav{height:70px}.navlinks{gap:16px}.navlinks .optional{display:none}
-      .hero{padding:72px 0 82px}.hero-grid{grid-template-columns:1fr;gap:46px}.hero-copy{margin-top:28px}
-      .section{padding:62px 0}.section-head{grid-template-columns:1fr;gap:14px}.doors{grid-template-columns:1fr}.door{min-height:260px}
-      .work-row{grid-template-columns:1fr auto;gap:12px}.work-kind{grid-column:1/-1}.about-grid{grid-template-columns:1fr;gap:34px}
-      .footer{flex-direction:column}.archive-strip{justify-content:flex-start;overflow:hidden;white-space:nowrap}
-    }
+    :root{--paper:#f3eee4;--paper-2:#e9e1d3;--ink:#201d18;--muted:#716a60;--line:rgba(32,29,24,.13);--green:#456b61;--green-soft:#dce6e1;--serif:"Songti SC","STSong","Noto Serif SC",Georgia,serif;--sans:Inter,"PingFang SC","Microsoft YaHei",Arial,sans-serif;--mono:"SFMono-Regular",Consolas,monospace}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 82% 5%,rgba(77,111,101,.11),transparent 27%),var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}.archive-strip{display:flex;justify-content:center;align-items:center;gap:10px;min-height:40px;padding:8px 18px;background:var(--ink);color:var(--paper);font-size:13px;letter-spacing:.03em}.archive-strip span{opacity:.64}.archive-strip a{border-bottom:1px solid rgba(243,238,228,.42);padding-bottom:1px}.shell{max-width:1180px;margin:0 auto;padding:0 32px}.nav{height:82px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.name{font-family:var(--serif);font-size:19px;letter-spacing:.04em}.navlinks{display:flex;align-items:center;gap:26px;color:var(--muted);font-size:14px}.navlinks a:hover{color:var(--ink)}.hero{padding:clamp(86px,11vw,158px) 0 clamp(88px,10vw,142px)}.hero-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(260px,.8fr);gap:clamp(44px,8vw,116px);align-items:end}.eyebrow{margin:0 0 24px;color:var(--green);font:12px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase}h1{font-family:var(--serif);font-weight:400;font-size:clamp(70px,11.5vw,150px);line-height:.86;letter-spacing:-.055em;margin:0}.hero-copy{max-width:720px;margin:34px 0 0;font-family:var(--serif);font-size:clamp(22px,2.8vw,35px);line-height:1.58}.hero-side{padding-bottom:8px}.hero-side p{margin:0;color:var(--muted);font-size:15px;line-height:1.9}.hero-side .small{margin-top:20px;font:12px/1.7 var(--mono);color:#8a8175}.section{padding:82px 0;border-top:1px solid var(--line)}.section-head{display:grid;grid-template-columns:170px 1fr;gap:30px;margin-bottom:42px}.section-kicker{font:12px/1.4 var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}.section-title{font-family:var(--serif);font-weight:400;font-size:clamp(34px,5vw,61px);line-height:1.08;margin:0;max-width:790px}.doors{display:grid;grid-template-columns:1fr 1fr;gap:18px}.door{position:relative;min-height:310px;border:1px solid var(--line);padding:28px;display:flex;flex-direction:column;justify-content:space-between;transition:.22s ease;background:rgba(255,255,255,.16)}.door:hover{transform:translateY(-3px);background:rgba(255,255,255,.4)}.door.words{background:linear-gradient(145deg,var(--green-soft),#e7ebe5)}.door .meta{font:12px/1.4 var(--mono);color:var(--muted);letter-spacing:.08em}.door h3{font-family:var(--serif);font-weight:400;font-size:clamp(42px,6vw,74px);line-height:1;margin:0 0 16px}.door p{max-width:480px;color:var(--muted);line-height:1.75;margin:0}.door .arrow{font-size:28px;position:absolute;right:26px;top:22px}.work-note{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(240px,.8fr);gap:clamp(36px,7vw,100px);align-items:end}.work-note p{margin:0;font-family:var(--serif);font-size:clamp(22px,2.8vw,34px);line-height:1.72}.work-links{display:flex;flex-direction:column;gap:12px;align-items:flex-start}.work-links a{display:inline-flex;align-items:center;gap:9px;padding-bottom:4px;border-bottom:1px solid var(--line);font-size:14px}.work-links small{color:var(--muted);line-height:1.7}.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px}.about-grid p{margin:0;font-family:var(--serif);font-size:20px;line-height:1.9}.about-grid .facts{font-family:var(--sans);font-size:14px;color:var(--muted);line-height:1.9}.footer{padding:44px 0 70px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:24px;color:var(--muted);font-size:13px}.footer-links{display:flex;gap:18px}@media(max-width:780px){.shell{padding:0 20px}.nav{height:70px}.navlinks{gap:16px}.navlinks .optional{display:none}.hero{padding:72px 0 82px}.hero-grid,.work-note{grid-template-columns:1fr;gap:46px}.hero-copy{margin-top:28px}.section{padding:62px 0}.section-head{grid-template-columns:1fr;gap:14px}.doors{grid-template-columns:1fr}.door{min-height:250px}.about-grid{grid-template-columns:1fr;gap:34px}.footer{flex-direction:column}.archive-strip{justify-content:flex-start;overflow:hidden;white-space:nowrap}}
   </style>
 </head>
 <body>
   <div class="archive-strip">
     <span>2015—2020</span>
-    <a href="/words/">“卖话的人”文字档案重新打开</a>
+    <a href="/words/">卖话的人</a>
     <span>→</span>
   </div>
 
@@ -104,7 +42,7 @@
             <p class="hero-copy">我写系统，也保存那些被时间留下来的东西。</p>
           </div>
           <div class="hero-side">
-            <p>后端工程师。现在做 AI、Agent 与企业软件，也做一些自己觉得有意思的工具。</p>
+            <p>后端工程师。现在主要做 AI、Agent 与企业软件，也一直保留一些自己的实验、文字和旧东西。</p>
             <p class="small">1995 —<br>GitHub @Wujiaxuan007</p>
           </div>
         </div>
@@ -119,48 +57,27 @@
           <a class="door" href="#work">
             <span class="arrow">↘</span>
             <div class="meta">NOW · ENGINEERING</div>
-            <div>
-              <h3>Work</h3>
-              <p>AI / Agent、后端系统、开发者工具，以及一些公开的工程实践。</p>
-            </div>
+            <div><h3>Work</h3><p>AI / Agent、后端系统、开发者工具，以及持续发生的工程实践。</p></div>
           </a>
           <a class="door words" href="/words/">
             <span class="arrow">↗</span>
             <div class="meta">2015—2020 · ARCHIVE</div>
-            <div>
-              <h3>卖话的人</h3>
-              <p>三十余件旧作。原文不改，原排版重建。2026 年重新打开。</p>
-            </div>
+            <div><h3>卖话的人</h3><p>那些年留下来的诗和文字。后来停了很久，直到现在重新打开。</p></div>
           </a>
         </div>
       </section>
 
       <section class="section" id="work" aria-labelledby="work-title">
         <div class="section-head">
-          <div class="section-kicker">Selected work</div>
-          <h2 class="section-title" id="work-title">不是履历，只留几件还值得看的东西。</h2>
+          <div class="section-kicker">Work</div>
+          <h2 class="section-title" id="work-title">工程是现在正在发生的部分。</h2>
         </div>
-        <div class="work-list">
-          <a class="work-row" href="https://github.com/Wujiaxuan007/intellij-sdk-code-samples">
-            <div class="work-kind">Plugin engineering</div>
-            <div><h3>intellij-sdk-code-samples</h3><p>IntelliJ Platform 插件开发示例与实践。</p></div>
-            <div class="go">↗</div>
-          </a>
-          <a class="work-row" href="https://github.com/Wujiaxuan007/Netcatty">
-            <div class="work-kind">Desktop tooling</div>
-            <div><h3>Netcatty</h3><p>把 SFTP 与终端放进同一个桌面工作流。</p></div>
-            <div class="go">↗</div>
-          </a>
-          <a class="work-row" href="https://github.com/Wujiaxuan007/gomall">
-            <div class="work-kind">Backend</div>
-            <div><h3>gomall</h3><p>Go 后端服务与业务系统实践。</p></div>
-            <div class="go">↗</div>
-          </a>
-          <a class="work-row" href="https://github.com/Wujiaxuan007">
-            <div class="work-kind">More</div>
-            <div><h3>GitHub</h3><p>更多公开仓库、实验与旧代码都留在这里。</p></div>
-            <div class="go">↗</div>
-          </a>
+        <div class="work-note">
+          <p>我长期做后端与平台工程，现在把更多时间放在 AI Agent、企业软件与开发者体验上。这里不列一份假的“精选项目清单”，公开代码和实验直接留在 GitHub。</p>
+          <div class="work-links">
+            <a href="https://github.com/Wujiaxuan007">GitHub @Wujiaxuan007 <span>↗</span></a>
+            <small>公开仓库、代码实验与一些旧项目。</small>
+          </div>
         </div>
       </section>
 
@@ -171,18 +88,14 @@
         </div>
         <div class="about-grid">
           <p>它也用来保存我曾经想过什么、写过什么，以及以后还会留下什么。</p>
-          <p class="facts">工程会继续更新。<br>旧作不会被 AI 重写。<br>时间会继续往后走，档案也会。</p>
+          <p class="facts">工程会继续更新。<br>过去保留过去的样子。<br>时间继续往后走，档案也会。</p>
         </div>
       </section>
     </main>
 
     <footer class="footer">
       <div>© Jacin Woo</div>
-      <div class="footer-links">
-        <a href="/words/">Words</a>
-        <a href="https://github.com/Wujiaxuan007">GitHub</a>
-        <a href="https://x.com/JsonWoo">X</a>
-      </div>
+      <div class="footer-links"><a href="/words/">Words</a><a href="https://github.com/Wujiaxuan007">GitHub</a><a href="https://x.com/JsonWoo">X</a></div>
     </footer>
   </div>
 </body>
