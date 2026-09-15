@@ -1,0 +1,82 @@
+/* Desktop reading mode: two true scroll regions. The pointer naturally decides which pane scrolls. */
+@media (min-width: 901px) {
+  body.reading {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  body.reading main {
+    height: calc(100vh - 60px);
+    overflow: hidden;
+  }
+
+  body.reading .hero,
+  body.reading .footer {
+    display: none;
+  }
+
+  body.reading .archive-layout {
+    width: min(1440px, 100%);
+    max-width: 1440px;
+    height: calc(100vh - 60px);
+    margin: 0 auto;
+    padding: 22px 28px 26px;
+    display: grid;
+    grid-template-columns: minmax(320px, .36fr) minmax(580px, .64fr);
+    gap: 30px;
+    align-items: stretch;
+    overflow: hidden;
+  }
+
+  body.reading .catalog-pane,
+  body.reading .reader {
+    min-height: 0;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(72,68,60,.24) transparent;
+  }
+
+  body.reading .catalog-pane {
+    padding: 0 12px 28px 0;
+  }
+
+  body.reading .reader {
+    display: block;
+    position: relative;
+    top: auto;
+    min-height: 0;
+    padding-top: 58px;
+  }
+
+  body.reading .catalog-pane::-webkit-scrollbar,
+  body.reading .reader::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  body.reading .catalog-pane::-webkit-scrollbar-thumb,
+  body.reading .reader::-webkit-scrollbar-thumb {
+    background: rgba(72,68,60,.2);
+    border-radius: 999px;
+  }
+
+  body.reading .catalog-pane::-webkit-scrollbar-track,
+  body.reading .reader::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  body.reading .year {
+    position: static;
+  }
+
+  body.reading .afterword {
+    display: block;
+  }
+
+  body.reading .poem-actions button:first-child {
+    display: inline;
+  }
+}

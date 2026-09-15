@@ -6,6 +6,7 @@
   <meta name="description" content="卖话的人 · 2015—2020 文字档案" />
   <title>卖话的人 · 2015—2020</title>
   <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./reading.css" />
 </head>
 <body>
   <header class="masthead">
@@ -51,6 +52,7 @@
   <script src="./app.js"></script>
   <script>
     const desktopReading = window.matchMedia('(min-width: 901px)');
+    let catalogPageScroll = 0;
 
     function markActiveWork(id) {
       document.querySelectorAll('[data-id].is-active').forEach(el => el.classList.remove('is-active'));
@@ -60,23 +62,40 @@
 
     function enterReading(id, push = true) {
       if (!id) return;
+      const firstDesktopOpen = desktopReading.matches && !document.body.classList.contains('reading');
+      if (firstDesktopOpen) catalogPageScroll = window.scrollY;
+
       document.body.classList.add('reading');
       const originalScrollIntoView = reader.scrollIntoView;
       reader.scrollIntoView = function () {};
       showWork(id, push);
       reader.scrollIntoView = originalScrollIntoView;
       markActiveWork(id);
-      if (!desktopReading.matches) {
+
+      if (desktopReading.matches) {
+        // Reading mode is a viewport workspace: left and right scroll independently.
+        // Always start the selected poem at its top, while keeping the catalog's own position.
+        requestAnimationFrame(() => {
+          window.scrollTo(0, 0);
+          reader.scrollTop = 0;
+          const active = document.querySelector('.catalog-pane [data-id].is-active');
+          if (firstDesktopOpen && active) {
+            active.scrollIntoView({block:'center', inline:'nearest'});
+          }
+        });
+      } else {
         document.querySelector('#reader').scrollIntoView({behavior:'smooth', block:'start'});
       }
     }
 
     function leaveReading(push = true) {
+      const wasDesktop = desktopReading.matches;
       document.body.classList.remove('reading');
       markActiveWork(null);
       if (push) history.pushState({}, '', location.pathname);
-      if (desktopReading.matches) {
-        document.querySelector('#timeline').scrollIntoView({behavior:'smooth', block:'start'});
+
+      if (wasDesktop) {
+        requestAnimationFrame(() => window.scrollTo({top: catalogPageScroll, behavior:'auto'}));
       } else {
         document.querySelector('#top').scrollIntoView({behavior:'smooth', block:'start'});
       }
