@@ -4,11 +4,11 @@ const works = [
   {"id": "cunzhuang", "title": "村长女儿", "date": "2015.06.08", "layout": "center airy", "body": "你就把花穿身上，\n你就把油抹鞋上。\n我就看看你，\n就看看而已。\n我二手了辆拉风的摩托车，\n它哼哼哈嘿，\n我载你去山穷水尽。\n你父亲哼哼唧唧，\n我怕了他的大巴掌，\n更怕没了你的小手帕。\n乡亲们歪歪唧唧，\n我偏要给你戴上一朵山楂花。\n三月的天还没六月，\n阿黑却吐着舌头像条狗，\n让我和它飞扬尘土架村口，\n让我拐你走。\n你貌美如花，\n又不鸣鸣哇哇，\n阿黑想带你去嘻嘻哈哈，\n就让我拐你走吧。"},
   {"id": "gou-guantou", "title": "狗罐头", "date": "2015.06.20", "layout": "left narrow", "body": "罐头里面没有沙丁鱼\n我也没有养猫咪\n却有只爱吃鱼的你\n\n罐头里面有牛肉粒\n我却没有养条狗\n只有个爱吃肉的我\n\n第一天\n左手提支玫瑰的就是你\n我用狗罐头作为见面礼\n你收下了却说你只吃鱼\n\n第二天\n白衬衫上带点咖啡痕迹的你\n用沙丁鱼罐头作为回礼\n我收下了没说我不吃鱼\n\n第三天\n我们没见面了\n\n第四天\n我们都饿死了"},
   {"id": "hongqunzi", "title": "红裙子", "date": "2015.07.07", "layout": "left narrow", "body": "左手捏着一把碎冰块，\n右边的裤兜藏着一包烟，\n衬衫唯一的口袋放着一颗糖。\n\n我握紧了左手，\n右手插在裤兜里，\n低头看着那粒糖，\n街上人不多，\n我们偏偏撞上。\n我手上滴水了，\n糖给了不看路的你。\n我没有打火机，\n烟还给了爸爸。"},
-  {"id": "sanfendangzhen", "title": "三分当真", "date": "2015.09.27", "layout": "left narrow"},
+  {"id": "sanfendangzhen", "title": "三分当真", "date": "2015.09.27", "layout": "left narrow", "body": "北方红色秃顶的山群，\n孩子在白色的泥里光着屁股。\n我静止在绿色的夕阳里，\n在灰色的麻将睡去。\n\n这里，\n没有鸽子，\n没有口哨，\n没有海盗船，\n没有白兰地可可。\n\n这里，\n有橘红色不带气泡的啤酒，\n有戴着帽子四只翅膀的鱼，\n有朵黑色巧克力蜜的蜜蜂，\n有爱喝啤酒千杯醉的黑熊。\n\n蜜蜂被我头发的黑色吸引，\n鱼儿借了我帽子，\n虽然我想要翅膀。。\n喝了偷了黑熊的橘红色水，\n逃跑路上醉倒了，\n我被黑熊吃掉了。"},
   {"id": "xiangfei", "title": "想飞", "date": "2015.10.11", "layout": "left narrow", "body": "北斗二胡班的黑娃，\n他长大弹起了吉他。\n我看着他挨了妈妈骂，\n也看着他抱着吉他乐开了花。\n\n他经常彻夜不归家，\n驻唱酒吧人混杂，\n让他嗓音更无暇。\n\n夜里四点冷了面颊，\n吵了妈妈挨了骂。\n早上八点暖了屁股，\n妈妈泪吵不敢骂。\n\n妈妈啊，\n你看到树上那只鸽子了吗，\n抱着它的是它妈妈吧，\n妈妈啊，\n让他自己飞会吧。"},
   {"id": "ni", "title": "你", "date": "2016.02.19", "layout": "center airy", "body": "爱是挑食的怪兽。\n它吞掉我的眼睛，\n让我看不见你的表情。\n它咬掉我的耳朵，\n让我听不到你的心情。\n它啃掉我的嘴巴，\n让我吻不到你的身体。\n它撕掉我的双手，\n让我擦不了你的眼泪。\n它毁掉我的双脚，\n让我走不出你的圈套。\n最后剩下一个脑袋瓜，\n那有所有我想要的你。"},
   {"id": "xiangxin", "title": "相心", "date": "2016.08.24", "layout": "left narrow airy", "body": "拉开窗帘让想你出去，\n又试着打开老式收音机，\n雪花音容易让人委屈，\n它不管我有什么情绪。\n\n打开抽屉想看日记，\n才想起故事的钥匙还在你那里。\n昨天打不开自己，\n今天又放不掉你。\n\n妈妈带我出门透气，\n却给我买了你最爱的冰淇淋。\n路过街角那家古董店，\n还摆着我答应你的花瓶。\n\n洗澡的时候会把头埋在水里，\n缺氧感的时候只来得及呼吸。\n重复敲下你的拼音选择另一个你，\n这样的输入法里也就不会有爱你。\n\n夜里三两点，\n一杯温开水，\n你看我眼里有星星。\n但愿你不要打喷嚏。"},
-  {"id": "duomei", "title": "你知道你有多美吗", "date": "2016.08.26", "layout": "left narrow"},
+  {"id": "duomei", "title": "你知道你有多美吗", "date": "2016.08.26", "layout": "left narrow", "body": "我\n在孤独里撒网，\n捞起过去的谎，\n落下碎成渣的向往，\n浮在酒里摇摇晃晃。\n\n你\n再给我折一只船，\n它不会沉入海里。\n再给我送一个吻，\n它不会陷入手心。\n\n早安，\n你知道你有多美吗？\n晚安，\n你知道你有多美吗？\n思念是罐冰可乐，\n咽下甜头，\n涌上空空。\n\n天是彩虹的，\n所以海是五颜六色的。\n好吧，\n这和我爱你好像没有什么关系。"},
   {"id": "danxiangshi", "title": "单想诗", "date": "2017.02.03", "layout": "center airy", "body": "六个月还差九天，\n你被折成了一首小诗，\n枕头枕着你的名字。\n那些特别想念的夜里，\n你被盖上了被子。\n后来，\n我们生了一首小小诗：\n“　你的睫毛下，\n　养着一窝小星星。\n　偶尔流星划过，\n　我会祝你快乐。\n　流星雨天，\n　分一半难过给我　”"},
   {"id": "linxi", "title": "林夕", "date": "2017.03.05", "layout": "center airy", "body": "苹果树上摘梨，\n鞋子踩着脏泥，\n脏泥繁华着大地。\n二十七点六八米，\n用镜子偷了一个你，\n小小的美丽，\n轻轻装进口袋里。\n\n苹果树上摘梨，\n离这儿差不多一里地，\n住着叔叔和阿姨。\n西边不到一个筋斗云，\n那儿有人想念你。\n他打开了镜子，\n他看见一双猥琐至极的眼睛，\n他砸了镜子，\n他碎了，\n他说这一切都是个阴谋。"},
   {"id": "tao", "title": "🍑", "date": "2017.03.15", "layout": "center airy", "body": "麦芒撕碎热光，\n汗水浸的痒痒。\n着急地挥着镰刀，\n死去的熊熊欲望。\n她像一颗饱满的蜜桃，\n鲜嫩、多汁、又多毛。\n浅色衬衣湿透了乳房，\n紧身裤子勒住的模样。\n俯下身的心慌，\n背对面的幻想。\n口干舌燥的半山腰，\n解渴的水蜜桃，\n谁都想咬。\n起伏有致的山峦，\n少年喘着粗气背对太阳。"},
@@ -24,9 +24,9 @@ const works = [
   {"id": "shijie", "title": "我的世界", "date": "2018.11.28", "layout": "center airy", "body": "天偷了海的蓝\n太阳偷了落叶的黄\n水偷了寂寞赤的内在\n但我不认为它们是小偷\n但人就可以\n\n鸟在空中\n慢慢的脱离了我的视野\n鸟消失了\n但我不认为鸟死了\n但人就可以"},
   {"id": "qcgdu", "title": "牵肠挂肚", "date": "2018.12.01", "layout": "center airy", "body": "春节\n火锅\n拉屎\n恋爱\n车祸"},
   {"id": "caolima", "title": "草里吗", "date": "2019.02", "layout": "center airy", "body": "草里蚂蚁在撞树\n草里吗\n在草里吗\n草里蚂蚁在跳舞\n草里吗\n在草里吗\n草里马儿在拉屎\n你说\n草里吗\n在草里吗"},
-  {"id": "linxi-murakami", "title": "林夕村上春树", "date": "2019.03.17", "layout": "center airy"},
+  {"id": "linxi-murakami", "title": "林夕村上春树", "date": "2019.03.17", "layout": "center airy", "body": "我做梦\n去过一个地方\n那里\n包融百川\n那里\n崎岖弯转\n那里\n潮汐相伴\n那里\n四季温软\n那里\n她等着我\n醒来"},
   {"id": "jinsefeizei", "title": "金色飞贼", "date": "2019.07.01", "layout": "center airy", "body": "在迷宫里绕，\n蝙蝠追着赶着躲着光，\n被纪念在画框。\n是谁在找出口？\n偷到天空的地方是悬崖，\n闪着泪光的地方是大海。\n一望无际的，\n鲨鱼的牙齿。\n锋利刺骨的，\n诗人的废纸。\n我往回追着，\n山羊打结的毛。\n我往回赶着，\n犀牛迟钝的角。\n我往回躲着，\n一望无际的蝙蝠。"},
-  {"id": "ele", "title": "饿了吃什么", "date": "2019.08.01", "layout": "center airy"},
+  {"id": "ele", "title": "饿了吃什么", "date": "2019.08.01", "layout": "center airy", "body": "人类不见了\n他伸出了一只爪\n沾了沾人类的水杯\n再跳上椅背\n砸吧砸吧嘴\n\n他伸出了同一只爪\n压着人类的委屈\n露出\n得逞的表情\n和\n粉粉的舌头\n却不知道换了新口味\n被辣的呜鸣流眼泪\n\n他伸出了同一只爪\n想要抹眼泪\n被辣的满脸鼻涕水\n\n人类回来了\n他伸出了同一只爪\n这样\n一份芥末猫爪就做好哩"},
   {"id": "shouzhudaitu", "title": "守株待兔", "date": "2019.08.07", "layout": "center airy", "body": "你七岁那年，\n我种下一株树。\n你喜欢绿色，\n你买了绿色的床单。\n你喜欢绿色，\n我买了绿色的打火机。\n你说你是一只兔子，\n那你一定是喜欢绿色的兔子。\n你喜欢绿色，\n我就花一生的时间，\n去守一株树。"},
   {"id": "jietou", "title": "你的街头", "date": "2020.06.06", "layout": "center airy", "body": "我来时\n抬头天上泛着微紫\n我光着脚\n在地上写满你的名字\n雨水泡着\n脚趾\n和\n我快乐得意的样子\n\n\n我走时\n低头一片赤褐色叶子\n我提着旧鞋子\n找窗户旁边的空位置\n人们喊着\n万岁\n和\n你的旧名字\n\n\n回头看着\n一切好似老样子\n再回头看着\n你的名字\n和\n我一起消失"}
 ];
@@ -54,48 +54,34 @@ function renderTimeline() {
       .join('');
     return `<section class="year-block"><div class="year">${year}</div><div class="works">${rows}</div></section>`;
   }).join('');
-
-  drawerList.innerHTML = works
-    .map(w => `<a href="#${w.id}" data-id="${w.id}">${escapeHtml(w.date)} · ${escapeHtml(w.title)}</a>`)
-    .join('');
+  drawerList.innerHTML = works.map(w => `<a href="#${w.id}" data-id="${w.id}">${escapeHtml(w.date)} · ${escapeHtml(w.title)}</a>`).join('');
 }
 
 function fishMarkup(text) {
   const widths = [34, 44, 56, 68, 78, 88, 96, 100, 94, 84, 72, 58, 44];
-  return text.split('\n')
-    .map((line, i) => `<span class="fish-line" style="width:${widths[i] || 70}%">${escapeHtml(line) || '&nbsp;'}</span>`)
-    .join('');
+  return text.split('\n').map((line, i) => `<span class="fish-line" style="width:${widths[i] || 70}%">${escapeHtml(line) || '&nbsp;'}</span>`).join('');
 }
 
 function bodyMarkup(work) {
-  if (!work.body) {
-    return `<div class="pending-note">这篇原稿已经归档。\n\n正在按当年的换行、空行、缩进与位置关系重新数字化。</div>`;
-  }
+  if (!work.body) return `<div class="pending-note">这篇原稿已经归档。\n\n正在按当年的换行、空行、缩进与位置关系重新数字化。</div>`;
   if (work.layout.split(/\s+/).includes('fish')) return fishMarkup(work.body);
   return escapeHtml(work.body);
 }
 
 function showWork(id, push = true) {
-  const work = works.find(item => item.id === id);
-  if (!work) return;
+  const work = works.find(item => item.id === id); if (!work) return;
   const layoutClasses = work.layout.split(/\s+/).filter(Boolean).map(name => `layout-${name}`).join(' ');
   reader.className = `reader active ${layoutClasses}`;
-  reader.innerHTML = `<article class="poem-wrap">
-    <header class="poem-head"><h2 class="poem-title">${escapeHtml(work.title)}</h2><div class="poem-meta">${escapeHtml(work.date)}<br>@卖话的人</div></header>
-    <div class="poem-body">${bodyMarkup(work)}</div>
-    <div class="poem-actions"><button type="button" data-action="back">← 回到时间线</button><button type="button" data-action="top">回到顶部 ↑</button></div>
-  </article>`;
+  reader.innerHTML = `<article class="poem-wrap"><header class="poem-head"><h2 class="poem-title">${escapeHtml(work.title)}</h2><div class="poem-meta">${escapeHtml(work.date)}<br>@卖话的人</div></header><div class="poem-body">${bodyMarkup(work)}</div><div class="poem-actions"><button type="button" data-action="back">← 回到时间线</button><button type="button" data-action="top">回到顶部 ↑</button></div></article>`;
   if (push) history.pushState({id}, '', `#${id}`);
-  reader.scrollIntoView({behavior:'smooth', block:'start'});
-  closeDrawer();
+  reader.scrollIntoView({behavior:'smooth', block:'start'}); closeDrawer();
 }
 
-function openDrawer() {drawer.classList.add('open');drawer.setAttribute('aria-hidden','false');scrim.hidden=false;document.body.classList.add('lock');document.querySelector('#indexToggle').setAttribute('aria-expanded','true');}
-function closeDrawer() {drawer.classList.remove('open');drawer.setAttribute('aria-hidden','true');scrim.hidden=true;document.body.classList.remove('lock');document.querySelector('#indexToggle').setAttribute('aria-expanded','false');}
+function openDrawer(){drawer.classList.add('open');drawer.setAttribute('aria-hidden','false');scrim.hidden=false;document.body.classList.add('lock');document.querySelector('#indexToggle').setAttribute('aria-expanded','true');}
+function closeDrawer(){drawer.classList.remove('open');drawer.setAttribute('aria-hidden','true');scrim.hidden=true;document.body.classList.remove('lock');document.querySelector('#indexToggle').setAttribute('aria-expanded','false');}
 
 document.addEventListener('click', event => {
-  const link = event.target.closest('[data-id]');
-  if (link) {event.preventDefault();showWork(link.dataset.id);return;}
+  const link = event.target.closest('[data-id]'); if (link) {event.preventDefault();showWork(link.dataset.id);return;}
   if (event.target.matches('[data-action="back"]')) timeline.scrollIntoView({behavior:'smooth',block:'start'});
   if (event.target.matches('[data-action="top"]')) document.querySelector('#top').scrollIntoView({behavior:'smooth',block:'start'});
 });
@@ -103,6 +89,5 @@ document.addEventListener('click', event => {
 document.querySelector('#indexToggle').addEventListener('click', openDrawer);
 document.querySelector('#drawerClose').addEventListener('click', closeDrawer);
 scrim.addEventListener('click', closeDrawer);
-window.addEventListener('popstate', () => {const id=location.hash.slice(1);if(id)showWork(id,false);});
-renderTimeline();
-const initial=location.hash.slice(1);if(initial)showWork(initial,false);
+window.addEventListener('popstate',()=>{const id=location.hash.slice(1);if(id)showWork(id,false);});
+renderTimeline(); const initial=location.hash.slice(1); if(initial)showWork(initial,false);
