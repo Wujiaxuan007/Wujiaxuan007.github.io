@@ -30,12 +30,7 @@
         </section>
       </div>
 
-      <section class="reader" id="reader" aria-live="polite">
-        <div class="reader-empty">
-          <span class="reader-mark">↗</span>
-          <p>从左边选一首。</p>
-        </div>
-      </section>
+      <section class="reader" id="reader" aria-live="polite"></section>
     </section>
 
     <footer class="footer">
@@ -55,20 +50,63 @@
 
   <script src="./app.js"></script>
   <script>
-    // 桌面端保持左侧目录位置，只替换右侧阅读区；移动端仍使用原来的单栏阅读行为。
-    document.addEventListener('click', function (event) {
-      if (!window.matchMedia('(min-width: 901px)').matches) return;
-      const link = event.target.closest('[data-id]');
-      if (!link) return;
-      event.preventDefault();
-      event.stopImmediatePropagation();
-      const originalScroll = reader.scrollIntoView;
-      reader.scrollIntoView = function () {};
-      showWork(link.dataset.id);
-      reader.scrollIntoView = originalScroll;
+    const desktopReading = window.matchMedia('(min-width: 901px)');
+
+    function markActiveWork(id) {
       document.querySelectorAll('[data-id].is-active').forEach(el => el.classList.remove('is-active'));
-      document.querySelectorAll(`[data-id="${link.dataset.id}"]`).forEach(el => el.classList.add('is-active'));
+      if (!id) return;
+      document.querySelectorAll(`[data-id="${CSS.escape(id)}"]`).forEach(el => el.classList.add('is-active'));
+    }
+
+    function enterReading(id, push = true) {
+      if (!id) return;
+      document.body.classList.add('reading');
+      const originalScrollIntoView = reader.scrollIntoView;
+      reader.scrollIntoView = function () {};
+      showWork(id, push);
+      reader.scrollIntoView = originalScrollIntoView;
+      markActiveWork(id);
+      if (!desktopReading.matches) {
+        document.querySelector('#reader').scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    }
+
+    function leaveReading(push = true) {
+      document.body.classList.remove('reading');
+      markActiveWork(null);
+      if (push) history.pushState({}, '', location.pathname);
+      if (desktopReading.matches) {
+        document.querySelector('#timeline').scrollIntoView({behavior:'smooth', block:'start'});
+      } else {
+        document.querySelector('#top').scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    }
+
+    document.addEventListener('click', function (event) {
+      const link = event.target.closest('[data-id]');
+      if (link) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        enterReading(link.dataset.id, true);
+        return;
+      }
+
+      const action = event.target.closest('[data-action="back"]');
+      if (action) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        leaveReading(true);
+      }
     }, true);
+
+    window.addEventListener('popstate', function () {
+      const id = location.hash.slice(1);
+      if (id) enterReading(id, false);
+      else leaveReading(false);
+    });
+
+    const initialId = location.hash.slice(1);
+    if (initialId) enterReading(initialId, false);
   </script>
 </body>
 </html>
