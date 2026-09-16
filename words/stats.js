@@ -112,17 +112,32 @@ reader.addEventListener('click', async (event) => {
   const poemId = bar?.dataset.poemId;
   if (!poemId) return;
 
-  const liked = button.getAttribute('aria-pressed') === 'true';
+  const likedBefore = button.getAttribute('aria-pressed') === 'true';
+  const likesEl = bar.querySelector('[data-stats-likes]');
+  const currentLikes = Number(String(likesEl.textContent).replace(/[^0-9]/g, '')) || 0;
+  const optimisticStats = {
+    views: Number(String(bar.querySelector('[data-stats-views]').textContent).replace(/[^0-9]/g, '')) || 0,
+    likes: Math.max(0, currentLikes + (likedBefore ? -1 : 1)),
+    liked: !likedBefore,
+  };
+
+  // Optimistic UI: acknowledge the click immediately, then reconcile with D1.
+  paintStats(poemId, optimisticStats);
   button.disabled = true;
 
   try {
     const stats = await poetryApi(`/api/poems/${encodeURIComponent(poemId)}/like`, {
-      method: liked ? 'DELETE' : 'POST',
+      method: likedBefore ? 'DELETE' : 'POST',
       body: JSON.stringify({ voter_id: poetryClientId }),
     });
     paintStats(poemId, stats);
   } catch (error) {
     console.warn('poetry like unavailable', error);
+    paintStats(poemId, {
+      views: optimisticStats.views,
+      likes: currentLikes,
+      liked: likedBefore,
+    });
   } finally {
     button.disabled = false;
   }
